@@ -18,14 +18,6 @@ export function Footer() {
             <p className="text-pastel-blue/80 text-sm leading-relaxed mb-6">
               Mewujudkan pelayanan masyarakat yang prima, inovatif, dan transparan menuju kelurahan yang mandiri dan sejahtera.
             </p>
-            <div className="flex items-center gap-3">
-              <Link
-                href="/admin"
-                className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors border border-white/5"
-              >
-                Portal Admin <ExternalLink className="w-3 h-3" />
-              </Link>
-            </div>
           </div>
 
           {/* Kolom 2: Kontak */}

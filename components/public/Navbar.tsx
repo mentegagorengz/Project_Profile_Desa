@@ -51,12 +51,6 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/admin"
-              className={`inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-colors font-semibold ${isScrolled ? 'bg-prussian text-white hover:bg-prussian/95' : 'bg-white/10 text-white hover:bg-white/20'}`}
-            >
-              Login <ArrowRight className="w-3 h-3" />
-            </Link>
           </div>
 
           <div className="flex lg:hidden">
@@ -72,26 +66,17 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="lg:hidden border-t border-pastel-blue bg-white py-4 px-6 space-y-3">
+        <div className="lg:hidden bg-white/95 backdrop-blur-lg border-t border-pastel-blue/50 px-6 py-6 space-y-4 shadow-xl">
           {navLinks.map((link) => (
             <Link
               key={link.label}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="block font-mono text-xs uppercase tracking-wider text-prussian/80 hover:text-teal-blue transition-colors py-2 font-medium"
+              className="block font-display text-sm font-semibold text-prussian hover:text-teal-blue hover:translate-x-1 transition-all py-2 border-b border-light-silver"
             >
               {link.label}
             </Link>
           ))}
-          <div className="pt-2 border-t border-pastel-blue/60">
-            <Link
-              href="/admin"
-              onClick={() => setIsOpen(false)}
-              className="flex items-center justify-center gap-1 font-mono text-xs uppercase tracking-wider bg-prussian text-white py-2.5 rounded-lg hover:bg-prussian/95 transition-colors font-semibold w-full"
-            >
-              Login Staf / Admin <ArrowRight className="w-3 h-3" />
-            </Link>
-          </div>
         </div>
       )}
     </nav>
