@@ -6,34 +6,24 @@ import { InfografisSection } from '@/components/public/InfografisSection'
 import { PetaSection } from '@/components/public/PetaSection'
 import { PricelistSection } from '@/components/public/PricelistSection'
 import { GaleriSection } from '@/components/public/GaleriSection'
-import { ArrowRight, FileText } from 'lucide-react'
 
 export default async function HomePage() {
   const supabase = await createClient()
 
-  const [
-    { data: profil }, 
-    { data: berita }, 
-    { data: produk }, 
-    { data: foto }
-  ] = await Promise.all([
+  const [{ data: profil }, { data: berita }, { data: produk }, { data: foto }] = await Promise.all([
     supabase.from('profil_kelurahan').select('*').single(),
-    supabase.from('berita_desa').select('judul, slug, created_at, konten').eq('status', 'published').order('created_at', { ascending: false }).limit(3),
+    supabase.from('berita_desa').select('judul, slug, created_at').eq('status', 'published').order('created_at', { ascending: false }).limit(5),
     supabase.from('produk_bumdes').select('nama_produk, kategori, harga_per_kg').order('nama_produk'),
     supabase.from('galeri_foto').select('id, url, caption').order('created_at', { ascending: false }).limit(6),
   ])
 
   return (
-    <main className="min-h-screen bg-background">
-      <header className="relative py-20 lg:py-32 overflow-hidden border-b bg-primary/5">
-        <div className="absolute inset-0 z-0 opacity-10 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary via-background to-background"></div>
-        <div className="mx-auto max-w-4xl px-6 relative z-10 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
-            Kelurahan <span className="text-primary">Manembo-nembo Tengah</span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Kecamatan Matuari, Kota Bitung, Sulawesi Utara
-          </p>
+    <main>
+      <header className="bg-prussian py-16 text-center md:text-left">
+        <div className="mx-auto max-w-3xl px-6">
+          <p className="font-mono text-xs uppercase tracking-wider text-pastel-blue mb-1">Website Resmi</p>
+          <h1 className="font-display text-4xl font-bold text-white">Kelurahan Manembo-nembo Tengah</h1>
+          <p className="text-pastel-blue mt-2">Kec. Matuari, Kota Bitung</p>
         </div>
       </header>
 
@@ -45,31 +35,22 @@ export default async function HomePage() {
         </>
       )}
 
-      <section className="py-16 border-b">
-        <div className="mx-auto max-w-4xl px-6">
-          <div className="flex justify-between items-end mb-8">
-            <h2 className="text-3xl font-bold">Berita Terbaru</h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
+      <section className="bg-white py-16">
+        <div className="mx-auto max-w-3xl px-6">
+          <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Informasi</p>
+          <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Berita Terbaru</h2>
+          <ul className="space-y-3">
             {berita?.map((b) => (
-              <Link key={b.slug} href={`/berita/${b.slug}`} className="group block h-full">
-                <div className="rounded-xl border bg-card p-6 h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
-                  <div className="text-xs text-muted-foreground mb-3 flex items-center">
-                    <FileText className="w-3 h-3 mr-1" />
-                    {new Date(b.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
-                  </div>
-                  <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors line-clamp-2">{b.judul}</h3>
-                  <p className="text-sm text-muted-foreground line-clamp-3 mb-4 flex-grow">{b.konten}</p>
-                  <div className="text-sm font-medium text-primary flex items-center mt-auto">
-                    Baca selengkapnya <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
-                  </div>
-                </div>
-              </Link>
+              <li key={b.slug} className="border-b border-pastel-blue pb-3">
+                <Link href={`/berita/${b.slug}`} className="text-prussian font-medium hover:text-mughal-green transition">
+                  {b.judul}
+                </Link>
+              </li>
             ))}
             {(!berita || berita.length === 0) && (
-              <p className="text-muted-foreground col-span-3 text-center py-8">Belum ada berita yang dipublikasikan.</p>
+              <li className="text-muted-foreground italic">Belum ada berita yang dipublikasikan.</li>
             )}
-          </div>
+          </ul>
         </div>
       </section>
 

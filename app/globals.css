@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+@theme {
+  --color-prussian: #103A57;
+  --color-mughal-green: #366B2B;
+  --color-teal-blue: #307B8E;
+  --color-pastel-blue: #A9D3C5;
+  --color-light-silver: #CEE5D6;
+
+  --font-display: var(--font-space-grotesk), sans-serif;
+  --font-body: var(--font-inter), sans-serif;
+  --font-mono: var(--font-plex-mono), monospace;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-space-grotesk);
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
