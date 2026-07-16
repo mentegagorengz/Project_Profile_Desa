@@ -1,5 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
 
 export default async function BeritaDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -14,9 +16,40 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
   if (!berita) notFound()
 
   return (
-    <article className="mx-auto max-w-3xl p-6">
-      <h1 className="text-3xl font-bold">{berita.judul}</h1>
-      <p className="mt-4 whitespace-pre-line">{berita.konten}</p>
-    </article>
+    <main className="min-h-screen">
+      <header className="bg-prussian py-10">
+        <div className="mx-auto max-w-3xl px-6">
+          <p className="font-mono text-xs uppercase tracking-wider text-pastel-blue mb-1">Berita</p>
+          <h1 className="font-display text-3xl font-bold text-white leading-tight">{berita.judul}</h1>
+          <p className="font-mono text-sm text-pastel-blue mt-2">
+            {new Date(berita.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </p>
+        </div>
+      </header>
+
+      <article className="bg-white py-16">
+        <div className="mx-auto max-w-3xl px-6">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-teal-blue font-mono text-xs uppercase tracking-wider mb-8 hover:text-mughal-green transition"
+          >
+            <ArrowLeft className="w-3 h-3" /> Kembali ke Beranda
+          </Link>
+
+          {berita.gambar_url && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={berita.gambar_url}
+              alt={berita.judul}
+              className="w-full aspect-video object-cover rounded-lg mb-8 border border-pastel-blue"
+            />
+          )}
+
+          <div className="prose max-w-none text-prussian/90 leading-relaxed">
+            <p className="whitespace-pre-line">{berita.konten}</p>
+          </div>
+        </div>
+      </article>
+    </main>
   )
 }

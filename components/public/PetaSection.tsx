@@ -1,7 +1,7 @@
-export function PetaSection({ embedUrl }: { embedUrl: string }) {
+export function PetaSection({ embedUrl, bgClass = 'bg-white' }: { embedUrl: string; bgClass?: string }) {
   if (!embedUrl) return null
   return (
-    <section className="bg-white py-16">
+    <section className={`${bgClass} py-16`}>
       <div className="mx-auto max-w-3xl px-6">
         <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Lokasi</p>
         <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Peta Kelurahan</h2>

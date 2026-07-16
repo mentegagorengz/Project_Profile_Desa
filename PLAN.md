@@ -1755,6 +1755,9 @@ git commit -m "feat: add galeri module with Supabase Storage upload/delete"
 
 **Files:**
 - Modify: `app/page.tsx`
+- Modify: `app/layout.tsx`
+- Modify: `tailwind.config.ts`
+- Modify: `app/globals.css`
 - Create: `app/components/SambutanLurah.tsx`
 - Create: `app/components/ProfilSection.tsx`
 - Create: `app/components/InfografisSection.tsx`
@@ -1765,18 +1768,88 @@ git commit -m "feat: add galeri module with Supabase Storage upload/delete"
 **Interfaces:**
 - Consumes: `profil_kelurahan`, `berita_desa`, `produk_bumdes`, `galeri_foto` (semua dari task sebelumnya)
 
+- [ ] **Step 0: Design tokens — warna & tipografi (Tailwind v4)**
+
+> **Catatan:** Project ini pakai Tailwind v4 (`@import "tailwindcss"` di `globals.css`, bukan `tailwind.config.ts`). Token warna & font didefinisikan lewat `@theme` block langsung di CSS — bukan `theme.extend` di config file seperti Tailwind v3.
+
+`app/globals.css` (tambahkan `@theme` block ini tepat setelah `@import "tailwindcss";`, sebelum `@layer base`):
+```css
+@import "tailwindcss";
+
+@theme {
+  --color-prussian: #103A57;
+  --color-mughal-green: #366B2B;
+  --color-teal-blue: #307B8E;
+  --color-pastel-blue: #A9D3C5;
+  --color-light-silver: #CEE5D6;
+
+  --font-display: var(--font-space-grotesk), sans-serif;
+  --font-body: var(--font-inter), sans-serif;
+  --font-mono: var(--font-plex-mono), monospace;
+}
+
+@layer base {
+  /* ...existing :root, .dark, dan base styles TETAP dipertahankan di sini... */
+}
+
+h1, h2, h3 {
+  font-family: var(--font-space-grotesk);
+}
+```
+
+Dengan `@theme`, class Tailwind otomatis tersedia: `bg-prussian`, `text-mughal-green`, `border-teal-blue`, `bg-pastel-blue`, `bg-light-silver`, `font-display`, `font-body`, `font-mono` — tidak perlu config file terpisah.
+
+`app/layout.tsx` (ganti font loading, pertahankan `metadata` dan struktur existing):
+```tsx
+import type { Metadata } from "next";
+import { Space_Grotesk, Inter, IBM_Plex_Mono } from "next/font/google";
+import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "600"], variable: "--font-plex-mono" });
+
+export const metadata: Metadata = {
+  title: "Kelurahan Manembo-nembo Tengah",
+  description: "Website resmi Kelurahan Manembo-nembo Tengah, Kecamatan Matuari, Kota Bitung",
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return (
+    <html lang="id" className={cn(spaceGrotesk.variable, inter.variable, plexMono.variable)}>
+      <body className="font-body text-prussian antialiased">{children}</body>
+    </html>
+  );
+}
+```
+
+- [ ] **Step 0.5: Verify token tersedia**
+
+```bash
+npm run dev
+```
+Buka DevTools di browser manapun, cek elemen `<body>` punya class `font-body text-prussian` dan warnanya keluar (bukan class ke-drop karena Tailwind gak kenal). Kalau warna gak muncul, pastikan `@theme` block ada di atas `@layer base`, bukan di bawahnya — urutan berpengaruh ke Tailwind v4.
+
 - [ ] **Step 1: Component tiap section**
 
 `app/components/SambutanLurah.tsx`:
 ```tsx
 export function SambutanLurah({ sambutan, fotoUrl }: { sambutan: string; fotoUrl: string | null }) {
   return (
-    <section className="py-12 border-b">
-      <div className="mx-auto max-w-3xl flex gap-6 items-center">
-        {fotoUrl && <img src={fotoUrl} alt="Lurah" className="h-32 w-32 rounded-full object-cover" />}
+    <section className="bg-light-silver py-16">
+      <div className="mx-auto max-w-3xl flex gap-8 items-center">
+        {fotoUrl && (
+          <img
+            src={fotoUrl}
+            alt="Lurah"
+            className="h-36 w-36 rounded-full object-cover ring-4 ring-mughal-green shrink-0"
+          />
+        )}
         <div>
-          <h2 className="text-xl font-semibold mb-2">Sambutan Lurah</h2>
-          <p className="whitespace-pre-line text-gray-700">{sambutan}</p>
+          <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Sambutan</p>
+          <h2 className="font-display text-2xl font-semibold text-prussian mb-3">Dari Lurah Manembo-nembo Tengah</h2>
+          <p className="whitespace-pre-line text-prussian/80 leading-relaxed">{sambutan}</p>
         </div>
       </div>
     </section>
@@ -1788,12 +1861,24 @@ export function SambutanLurah({ sambutan, fotoUrl }: { sambutan: string; fotoUrl
 ```tsx
 export function ProfilSection({ visi, misi, sejarah }: { visi: string; misi: string; sejarah: string }) {
   return (
-    <section className="py-12 border-b">
-      <div className="mx-auto max-w-3xl space-y-4">
-        <h2 className="text-xl font-semibold">Profil Kelurahan</h2>
-        <div><h3 className="font-medium">Visi</h3><p className="text-gray-700">{visi}</p></div>
-        <div><h3 className="font-medium">Misi</h3><p className="text-gray-700">{misi}</p></div>
-        <div><h3 className="font-medium">Sejarah</h3><p className="text-gray-700 whitespace-pre-line">{sejarah}</p></div>
+    <section className="bg-white py-16">
+      <div className="mx-auto max-w-3xl">
+        <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Profil</p>
+        <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Kelurahan Manembo-nembo Tengah</h2>
+        <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="rounded-lg bg-pastel-blue/40 border border-pastel-blue p-5">
+            <h3 className="font-display font-semibold text-prussian mb-2">Visi</h3>
+            <p className="text-prussian/80 text-sm leading-relaxed">{visi}</p>
+          </div>
+          <div className="rounded-lg bg-pastel-blue/40 border border-pastel-blue p-5">
+            <h3 className="font-display font-semibold text-prussian mb-2">Misi</h3>
+            <p className="text-prussian/80 text-sm leading-relaxed">{misi}</p>
+          </div>
+        </div>
+        <div>
+          <h3 className="font-display font-semibold text-prussian mb-2">Sejarah</h3>
+          <p className="text-prussian/80 whitespace-pre-line leading-relaxed">{sejarah}</p>
+        </div>
       </div>
     </section>
   )
@@ -1810,14 +1895,15 @@ export function InfografisSection({ penduduk, kk, rt, rw }: { penduduk: number; 
     { label: 'RW', value: rw },
   ]
   return (
-    <section className="py-12 border-b">
+    <section className="bg-light-silver py-16">
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-xl font-semibold mb-4">Infografis</h2>
+        <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Infografis</p>
+        <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Kelurahan dalam Angka</h2>
         <div className="grid grid-cols-4 gap-4">
           {stats.map((s) => (
-            <div key={s.label} className="rounded border p-4 text-center">
-              <p className="text-2xl font-bold">{s.value}</p>
-              <p className="text-sm text-gray-500">{s.label}</p>
+            <div key={s.label} className="rounded-lg bg-white border border-pastel-blue p-5 text-center">
+              <p className="font-mono text-3xl font-semibold text-mughal-green">{s.value.toLocaleString('id-ID')}</p>
+              <p className="text-sm text-prussian/70 mt-1">{s.label}</p>
             </div>
           ))}
         </div>
@@ -1832,10 +1918,15 @@ export function InfografisSection({ penduduk, kk, rt, rw }: { penduduk: number; 
 export function PetaSection({ embedUrl }: { embedUrl: string }) {
   if (!embedUrl) return null
   return (
-    <section className="py-12 border-b">
+    <section className="bg-white py-16">
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-xl font-semibold mb-4">Peta Kelurahan</h2>
-        <iframe src={embedUrl} className="w-full h-80 rounded border" loading="lazy" />
+        <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Lokasi</p>
+        <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Peta Kelurahan</h2>
+        <iframe
+          src={embedUrl}
+          className="w-full h-80 rounded-lg border-2 border-teal-blue"
+          loading="lazy"
+        />
       </div>
     </section>
   )
@@ -1848,27 +1939,40 @@ type Produk = { nama_produk: string; kategori: string; harga_per_kg: number }
 
 export function PricelistSection({ produk }: { produk: Produk[] }) {
   return (
-    <section className="py-12 border-b">
+    <section className="bg-light-silver py-16">
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-xl font-semibold mb-4">Harga Bank Sampah</h2>
-        <table className="w-full border-collapse">
-          <thead>
-            <tr className="border-b text-left">
-              <th className="py-2">Jenis Sampah</th>
-              <th className="py-2">Kategori</th>
-              <th className="py-2">Harga/kg</th>
-            </tr>
-          </thead>
-          <tbody>
-            {produk.map((p) => (
-              <tr key={p.nama_produk} className="border-b">
-                <td className="py-2">{p.nama_produk}</td>
-                <td className="py-2">{p.kategori}</td>
-                <td className="py-2">Rp{p.harga_per_kg.toLocaleString('id-ID')}</td>
-              </tr>
+        <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Bank Sampah</p>
+        <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Harga Sampah per Kilogram</h2>
+
+        {/* Signature element: struk kasir — border dashed, header solid, angka mono rata kanan */}
+        <div
+          className="mx-auto max-w-md bg-white shadow-sm border-x-2 border-dashed border-prussian/30"
+          style={{
+            borderTop: '2px dashed rgba(16,58,87,0.3)',
+            borderBottom: '2px dashed rgba(16,58,87,0.3)',
+          }}
+        >
+          <div className="bg-mughal-green text-white px-6 py-3 text-center">
+            <p className="font-display font-semibold tracking-wide">STRUK HARGA BANK SAMPAH</p>
+            <p className="font-mono text-xs opacity-80">Kelurahan Manembo-nembo Tengah</p>
+          </div>
+          <div className="px-6 py-4">
+            {produk.map((p, idx) => (
+              <div key={p.nama_produk} className={`flex justify-between py-2 text-sm ${idx !== produk.length - 1 ? 'border-b border-dashed border-prussian/15' : ''}`}>
+                <div>
+                  <p className="text-prussian font-medium">{p.nama_produk}</p>
+                  <p className="text-teal-blue text-xs">{p.kategori}</p>
+                </div>
+                <p className="font-mono text-prussian font-semibold self-center">
+                  Rp{p.harga_per_kg.toLocaleString('id-ID')}/kg
+                </p>
+              </div>
             ))}
-          </tbody>
-        </table>
+          </div>
+          <div className="px-6 py-3 text-center border-t border-dashed border-prussian/20">
+            <p className="font-mono text-xs text-prussian/50">Harga berlaku di kantor kelurahan</p>
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -1881,12 +1985,20 @@ type Foto = { id: string; url: string; caption: string | null }
 
 export function GaleriSection({ foto }: { foto: Foto[] }) {
   return (
-    <section className="py-12">
+    <section className="bg-white py-16">
       <div className="mx-auto max-w-3xl">
-        <h2 className="text-xl font-semibold mb-4">Galeri</h2>
+        <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Dokumentasi</p>
+        <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Galeri Kegiatan</h2>
         <div className="grid grid-cols-3 gap-3">
           {foto.slice(0, 6).map((f) => (
-            <img key={f.id} src={f.url} alt={f.caption ?? ''} className="aspect-square w-full rounded object-cover" />
+            <div key={f.id} className="group relative aspect-square overflow-hidden rounded-lg">
+              <img src={f.url} alt={f.caption ?? ''} className="h-full w-full object-cover transition group-hover:scale-105" />
+              {f.caption && (
+                <div className="absolute inset-0 bg-teal-blue/0 group-hover:bg-teal-blue/60 transition flex items-end p-2 opacity-0 group-hover:opacity-100">
+                  <p className="text-white text-xs">{f.caption}</p>
+                </div>
+              )}
+            </div>
           ))}
         </div>
       </div>
@@ -1920,9 +2032,12 @@ export default async function HomePage() {
 
   return (
     <main>
-      <header className="py-8 border-b">
-        <h1 className="mx-auto max-w-3xl text-3xl font-bold">Kelurahan Manembo-nembo Tengah</h1>
-        <p className="mx-auto max-w-3xl text-gray-500">Kec. Matuari, Kota Bitung</p>
+      <header className="bg-prussian py-10">
+        <div className="mx-auto max-w-3xl">
+          <p className="font-mono text-xs uppercase tracking-wider text-pastel-blue mb-1">Website Resmi</p>
+          <h1 className="font-display text-3xl font-bold text-white">Kelurahan Manembo-nembo Tengah</h1>
+          <p className="text-pastel-blue mt-1">Kec. Matuari, Kota Bitung</p>
+        </div>
       </header>
 
       {profil && (
@@ -1933,13 +2048,16 @@ export default async function HomePage() {
         </>
       )}
 
-      <section className="py-12 border-b">
+      <section className="bg-white py-16">
         <div className="mx-auto max-w-3xl">
-          <h2 className="text-xl font-semibold mb-4">Berita Terbaru</h2>
-          <ul className="space-y-2">
+          <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Informasi</p>
+          <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Berita Terbaru</h2>
+          <ul className="space-y-3">
             {berita?.map((b) => (
-              <li key={b.slug}>
-                <Link href={`/berita/${b.slug}`} className="text-blue-600 hover:underline">{b.judul}</Link>
+              <li key={b.slug} className="border-b border-pastel-blue pb-3">
+                <Link href={`/berita/${b.slug}`} className="text-prussian font-medium hover:text-mughal-green transition">
+                  {b.judul}
+                </Link>
               </li>
             ))}
           </ul>
@@ -1981,3 +2099,11 @@ git commit -m "feat: restructure public homepage with all 7 required sections"
 **Type consistency:** `CartItem`, `CheckoutItem`, dan kolom `detail_transaksi` konsisten pakai `produk_id`, `jumlah_kg`, `harga_satuan` di semua task.
 
 ---
+
+**Plan lengkap tersimpan di `PLAN.md`. Dua opsi eksekusi:**
+
+**1. Subagent-Driven (recommended)** — dispatch subagent baru per task, review antar task, iterasi cepat.
+
+**2. Inline Execution** — eksekusi task berurutan dalam sesi ini, batch dengan checkpoint review.
+
+Mana yang mau dipakai?

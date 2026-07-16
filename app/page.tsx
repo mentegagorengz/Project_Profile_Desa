@@ -42,19 +42,24 @@ export default async function HomePage() {
           <ul className="space-y-3">
             {berita?.map((b) => (
               <li key={b.slug} className="border-b border-dashed border-pastel-blue pb-3">
-                <Link href={`/berita/${b.slug}`} className="text-prussian font-medium hover:text-mughal-green transition">
+                <Link href={`/berita/${b.slug}`} className="text-prussian font-medium hover:text-mughal-green transition block">
                   {b.judul}
                 </Link>
+                {b.created_at && (
+                  <p className="font-mono text-xs text-prussian/50 mt-1">
+                    {new Date(b.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  </p>
+                )}
               </li>
             ))}
             {(!berita || berita.length === 0) && (
-              <li className="text-muted-foreground italic">Belum ada berita yang dipublikasikan.</li>
+              <li className="text-prussian/50 italic">Belum ada berita yang dipublikasikan.</li>
             )}
           </ul>
         </div>
       </section>
 
-      {profil?.google_maps_embed_url && <PetaSection embedUrl={profil.google_maps_embed_url} />}
+      {profil?.google_maps_embed_url && <PetaSection embedUrl={profil.google_maps_embed_url} bgClass="bg-light-silver" />}
       <PricelistSection produk={produk ?? []} />
       <GaleriSection foto={foto ?? []} />
     </main>
