@@ -1,67 +1,86 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-import { Menu, X, ArrowRight } from 'lucide-react'
+import { usePathname } from 'next/navigation'
+import { Menu, X, Leaf } from 'lucide-react'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll)
-    // Initial check
-    handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const pathname = usePathname()
 
   const navLinks = [
     { label: 'Beranda', href: '/' },
-    { label: 'Sambutan', href: '/#sambutan' },
-    { label: 'Profil', href: '/#profil' },
-    { label: 'Statistik', href: '/#infografis' },
-    { label: 'Berita', href: '/#berita' },
-    { label: 'Peta', href: '/#lokasi' },
+    { label: 'Profil Kelurahan', href: '/#profil' },
     { label: 'Harga Sampah', href: '/#harga' },
+    { label: 'Berita', href: '/berita' },
     { label: 'Galeri', href: '/galeri' },
   ]
 
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return pathname === '/'
+    }
+    return pathname.startsWith(href)
+  }
+
   return (
-    <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-pastel-blue shadow-sm py-0' : 'bg-transparent py-2'}`}>
-      <div className="mx-auto max-w-4xl px-6">
+    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-border shadow-sm">
+      <div className="mx-auto max-w-6xl px-6">
         <div className="flex h-16 items-center justify-between">
           {/* Logo / Brand */}
-          <Link href="/" className="flex items-center gap-2">
-            <span className={`font-display font-bold text-sm sm:text-base leading-none transition-colors duration-300 ${isScrolled ? 'text-prussian' : 'text-white'}`}>
-              Manembo-nembo Tengah
-            </span>
+          <Link href="/" className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center shrink-0">
+              <Leaf className="w-5 h-5 text-white" />
+            </div>
+            <div className="leading-tight text-left">
+              <span className="block font-display font-bold text-sm text-foreground">
+                Manembo-nembo Tengah
+              </span>
+              <span className="block text-[10px] text-muted-foreground font-medium">
+                Kec. Matuari · Kota Bitung
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={`font-mono text-xs uppercase tracking-wider transition-colors font-medium ${isScrolled ? 'text-prussian/80 hover:text-teal-blue' : 'text-white/80 hover:text-white'}`}
-              >
-                {link.label}
-              </Link>
-            ))}
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => {
+              const active = isActive(link.href)
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-colors ${
+                    active
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-foreground hover:bg-muted'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              )
+            })}
           </div>
 
-          <div className="flex lg:hidden">
+          {/* Portal Admin button */}
+          <div className="hidden md:block">
+            <Link href="/admin">
+              <button className="bg-primary hover:bg-primary/90 text-primary-foreground text-xs font-semibold px-4 py-2 rounded-lg transition-colors cursor-pointer">
+                Portal Admin
+              </button>
+            </Link>
+          </div>
+
+          <div className="flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`inline-flex items-center justify-center p-2 rounded-md transition-colors ${isScrolled ? 'text-prussian hover:text-teal-blue hover:bg-light-silver/50' : 'text-white hover:bg-white/10'}`}
+              className="inline-flex items-center justify-center p-2 rounded-lg text-foreground hover:bg-muted transition-colors"
               aria-label={isOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
             >
-              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
         </div>
@@ -69,17 +88,31 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div id="mobile-menu" className="lg:hidden bg-white/95 backdrop-blur-lg border-t border-pastel-blue/50 px-6 py-6 space-y-4 shadow-xl">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className="block font-display text-sm font-semibold text-prussian hover:text-teal-blue hover:translate-x-1 transition-all py-2 border-b border-light-silver"
-            >
-              {link.label}
+        <div id="mobile-menu" className="md:hidden bg-white border-t border-border px-6 py-4 space-y-2">
+          {navLinks.map((link) => {
+            const active = isActive(link.href)
+            return (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`block px-4 py-2.5 rounded-lg text-sm font-semibold transition-colors ${
+                  active
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-foreground hover:bg-muted'
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
+          <div className="pt-2">
+            <Link href="/admin" onClick={() => setIsOpen(false)}>
+              <button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-semibold py-2.5 rounded-lg transition-colors cursor-pointer">
+                Portal Admin
+              </button>
             </Link>
-          ))}
+          </div>
         </div>
       )}
     </nav>

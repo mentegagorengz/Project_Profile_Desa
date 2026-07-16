@@ -1,81 +1,76 @@
 import Link from 'next/link'
-import { MapPin, Phone, Mail, Clock, ExternalLink } from 'lucide-react'
+import { MapPin, Phone, Mail, Leaf } from 'lucide-react'
 
 export function Footer() {
   return (
-    <footer className="bg-prussian pt-16 pb-8 border-t border-white/10 relative overflow-hidden">
-      {/* Decorative gradient */}
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-teal-blue/50 to-transparent" />
-
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-          {/* Kolom 1: Identitas */}
-          <div>
-            <h3 className="font-display text-xl font-bold text-white mb-4">
-              Kelurahan<br />
-              <span className="text-pastel-blue">Manembo-nembo Tengah</span>
-            </h3>
-            <p className="text-pastel-blue/80 text-sm leading-relaxed mb-6">
-              Mewujudkan pelayanan masyarakat yang prima, inovatif, dan transparan menuju kelurahan yang mandiri dan sejahtera.
-            </p>
+    <footer className="bg-[#14532d] text-white border-t border-green-800">
+      <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Column 1: Identity */}
+        <div>
+          <div className="flex items-center gap-2.5 mb-4">
+            <div className="w-9 h-9 rounded-lg bg-green-500/20 flex items-center justify-center">
+              <Leaf size={18} className="text-green-300" />
+            </div>
+            <div>
+              <div className="text-sm font-bold">Manembo-nembo Tengah</div>
+              <div className="text-xs text-green-300 font-medium">BUMDes Maju Bersama</div>
+            </div>
           </div>
-
-          {/* Kolom 2: Kontak */}
-          <div>
-            <h3 className="font-display font-semibold text-sm text-pastel-blue mb-4">Kontak & Lokasi</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-pastel-blue shrink-0 mt-0.5" />
-                <span className="text-white/80 text-sm leading-relaxed">
-                  Jl. SH Sarundajang, Kec. Matuari, Kota Bitung, Sulawesi Utara
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-pastel-blue shrink-0" />
-                <span className="text-white/80 text-sm">(0438) XXXXXX</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-pastel-blue shrink-0" />
-                <span className="text-white/80 text-sm">kontak@manembonembotengah.go.id</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Kolom 3: Jam Layanan */}
-          <div>
-            <h3 className="font-display font-semibold text-sm text-pastel-blue mb-4">Jam Layanan</h3>
-            <ul className="space-y-3">
-              <li className="flex items-center justify-between text-sm border-b border-white/10 pb-2">
-                <div className="flex items-center gap-2 text-white/80">
-                  <Clock className="w-4 h-4 text-pastel-blue" /> Senin - Kamis
-                </div>
-                <span className="text-white font-medium">08:00 - 16:00</span>
-              </li>
-              <li className="flex items-center justify-between text-sm border-b border-white/10 pb-2">
-                <div className="flex items-center gap-2 text-white/80">
-                  <Clock className="w-4 h-4 text-pastel-blue" /> Jumat
-                </div>
-                <span className="text-white font-medium">08:00 - 11:30</span>
-              </li>
-              <li className="flex items-center justify-between text-sm">
-                <div className="flex items-center gap-2 text-white/80">
-                  <Clock className="w-4 h-4 text-pastel-blue" /> Sabtu & Minggu
-                </div>
-                <span className="text-red-400 font-medium">Tutup</span>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="border-t border-white/10 pt-8 text-center flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-pastel-blue/60 font-mono">
-            &copy; {new Date().getFullYear()} Kelurahan Manembo-nembo Tengah. Hak Cipta Dilindungi.
+          <p className="text-sm text-green-200 leading-relaxed">
+            Mewujudkan pelayanan masyarakat yang prima, inovatif, dan transparan menuju kelurahan yang mandiri, sejahtera, dan berkelanjutan.
           </p>
-          <div className="flex gap-4 text-xs font-mono text-pastel-blue/60">
-            <Link href="#" className="hover:text-white transition-colors">Kebijakan Privasi</Link>
-            <Link href="#" className="hover:text-white transition-colors">Syarat & Ketentuan</Link>
+        </div>
+
+        {/* Column 2: Quick Links */}
+        <div>
+          <h4 className="font-bold text-green-300 mb-4 text-sm uppercase tracking-wider">
+            Tautan Cepat
+          </h4>
+          <div className="flex flex-col gap-2">
+            {[
+              { label: 'Beranda', href: '/' },
+              { label: 'Profil Kelurahan', href: '/#profil' },
+              { label: 'Harga Sampah', href: '/#harga' },
+              { label: 'Berita Desa', href: '/berita' },
+              { label: 'Galeri Kegiatan', href: '/galeri' },
+            ].map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="text-sm text-green-200 hover:text-white transition-colors cursor-pointer text-left self-start"
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
+
+        {/* Column 3: Contact */}
+        <div>
+          <h4 className="font-bold text-green-300 mb-4 text-sm uppercase tracking-wider">
+            Kontak
+          </h4>
+          <div className="space-y-3.5 text-sm text-green-200">
+            <div className="flex items-start gap-2.5">
+              <MapPin size={15} className="mt-0.5 shrink-0 text-green-400" />
+              <span className="leading-relaxed">
+                Jl. SH Sarundajang, Kec. Matuari, Kota Bitung, Sulawesi Utara
+              </span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Phone size={15} className="text-green-400" />
+              <span>(0438) XXXXXX</span>
+            </div>
+            <div className="flex items-center gap-2.5">
+              <Mail size={15} className="text-green-400" />
+              <span>kontak@manembonembotengah.go.id</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="border-t border-green-800 py-6 text-center text-xs text-green-400 font-mono">
+        © {new Date().getFullYear()} Pemerintah Kelurahan Manembo-nembo Tengah. Hak cipta dilindungi.
       </div>
     </footer>
   )

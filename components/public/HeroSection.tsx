@@ -1,76 +1,38 @@
 import Link from 'next/link'
-import { ChevronDown } from 'lucide-react'
+import { Leaf, ArrowRight } from 'lucide-react'
 
 export function HeroSection() {
   return (
     <header
       id="beranda"
-      className="relative overflow-hidden bg-prussian"
-      style={{
-        background: 'linear-gradient(135deg, #103A57 0%, #1a5276 50%, #0d2e42 100%)',
-      }}
+      className="relative bg-gradient-to-br from-[#14532d] via-[#166534] to-[#15803d] text-white overflow-hidden"
     >
-      {/* Decorative background grid pattern */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-      </div>
-
-      {/* Accent orbs */}
-      <div
-        className="absolute top-10 right-10 w-64 h-64 rounded-full opacity-10 pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #A9D3C5 0%, transparent 70%)' }}
-      />
-      <div
-        className="absolute -bottom-10 -left-10 w-80 h-80 rounded-full opacity-10 pointer-events-none"
-        style={{ background: 'radial-gradient(circle, #307B8E 0%, transparent 70%)' }}
-      />
-
-      <div className="relative mx-auto max-w-3xl px-6 pt-32 pb-20 md:pt-40 md:pb-28 text-center md:text-left">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1 mb-6">
-          <span className="w-2 h-2 rounded-full bg-pastel-blue animate-pulse" />
-          <span className="font-mono text-[10px] uppercase tracking-widest text-pastel-blue">
-            Website Resmi Kelurahan
+      <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1400&q=80')] bg-cover bg-center pointer-events-none" />
+      <div className="relative max-w-3xl mx-auto md:max-w-6xl px-6 py-20 md:py-28">
+        <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/15 text-xs font-semibold text-green-200 mb-5">
+            <Leaf size={12} /> BUMDes Maju Bersama · Bank Sampah Plastik
           </span>
+          <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
+            Manembo-nembo Tengah<br />
+            <span className="text-green-300">Bersih, Makmur, Lestari</span>
+          </h1>
+          <p className="text-green-100 text-sm md:text-lg leading-relaxed mb-8">
+            Bergabunglah dalam program bank sampah plastik kelurahan kami. Tukar sampah plastik Anda dengan nilai ekonomi nyata dan bantu jaga lingkungan bersama-sama.
+          </p>
+          <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+            <Link href="/berita">
+              <button className="bg-white text-green-800 hover:bg-green-50 font-semibold px-6 py-3 rounded-lg transition-colors cursor-pointer inline-flex items-center gap-2">
+                Lihat Berita <ArrowRight size={16} />
+              </button>
+            </Link>
+            <Link href="/#profil">
+              <button className="text-white border border-white/30 hover:bg-white/10 font-semibold px-6 py-3 rounded-lg transition-colors cursor-pointer">
+                Profil Kelurahan
+              </button>
+            </Link>
+          </div>
         </div>
-
-        <h1 className="font-display text-4xl md:text-5xl font-bold text-white leading-tight mb-3">
-          Kelurahan<br />
-          <span className="text-pastel-blue">Manembo-nembo Tengah</span>
-        </h1>
-        <p className="text-pastel-blue/80 text-sm md:text-base mt-2 mb-8">
-          Kecamatan Matuari · Kota Bitung · Sulawesi Utara
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-          <Link
-            href="/#profil"
-            className="inline-flex items-center justify-center gap-2 bg-mughal-green hover:bg-teal-blue text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-hover hover:-translate-y-1 font-mono text-sm uppercase tracking-wide"
-          >
-            Lihat Profil
-          </Link>
-          <Link
-            href="/#berita"
-            className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-hover hover:-translate-y-1 font-mono text-sm uppercase tracking-wide"
-          >
-            Baca Berita
-          </Link>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="relative pb-8 flex justify-center">
-        <a href="/#sambutan" className="text-pastel-blue/60 hover:text-pastel-blue transition-colors animate-bounce">
-          <ChevronDown className="w-6 h-6" />
-        </a>
       </div>
     </header>
   )

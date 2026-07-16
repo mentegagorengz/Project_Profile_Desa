@@ -1,6 +1,6 @@
 export function SambutanLurah({ sambutan, fotoUrl }: { sambutan: string; fotoUrl: string | null }) {
   return (
-    <section id="sambutan" className="bg-white py-20">
+    <section id="sambutan" className="bg-[#f8faf7] py-20">
       <div className="mx-auto max-w-3xl px-6">
         <div className="flex flex-col md:flex-row gap-10 items-center">
           {/* Foto */}

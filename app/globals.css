@@ -46,24 +46,24 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #103A57;          /* Prussian Blue — main text (High Contrast Rule) */
+  --foreground: #1a2e1a;          /* Dark forest green — main text */
   --card: #ffffff;
-  --card-foreground: #103A57;
+  --card-foreground: #1a2e1a;
   --popover: #ffffff;
-  --popover-foreground: #103A57;
-  --primary: #366B2B;             /* Mughal Green — CTA & growth */
+  --popover-foreground: #1a2e1a;
+  --primary: #166534;             /* Forest green — main actions */
   --primary-foreground: #ffffff;
-  --secondary: #307B8E;           /* Teal Blue — supporting interactions */
-  --secondary-foreground: #ffffff;
-  --muted: #CEE5D6;               /* Light Silver — alt section background */
-  --muted-foreground: #307B8E;    /* Teal Blue — supporting text (never light gray) */
-  --accent: #A9D3C5;              /* Pastel Blue — light highlight */
-  --accent-foreground: #103A57;
-  --destructive: #b91c1c;
+  --secondary: #dcfce7;           /* Soft light green — supporting highlights */
+  --secondary-foreground: #14532d;
+  --muted: #f0f9f0;               /* Very light green tint */
+  --muted-foreground: #6b7280;
+  --accent: #fef3c7;
+  --accent-foreground: #92400e;
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: #d5e4db;              /* Light Silver-tinted soft divider */
-  --input: #d5e4db;
-  --ring: #366B2B;                /* Mughal Green focus ring */
+  --border: rgba(22, 101, 52, 0.12); /* Soft green-tinted divider */
+  --input: #f0f9f0;
+  --ring: #16a34a;
 }
 
 .dark {

@@ -28,18 +28,27 @@ export default async function HomePage() {
       <HeroSection />
 
       {profil && (
+        <FadeIn delay={100}>
+          <InfografisSection penduduk={profil.jumlah_penduduk} kk={profil.jumlah_kk} rt={profil.jumlah_rt} rw={profil.jumlah_rw} />
+        </FadeIn>
+      )}
+
+      {profil && (
         <>
           <FadeIn delay={100}><SambutanLurah sambutan={profil.sambutan_lurah} fotoUrl={profil.foto_lurah_url} /></FadeIn>
           <FadeIn delay={100}><ProfilSection visi={profil.visi} misi={profil.misi} sejarah={profil.sejarah} /></FadeIn>
-          <FadeIn delay={100}><InfografisSection penduduk={profil.jumlah_penduduk} kk={profil.jumlah_kk} rt={profil.jumlah_rt} rw={profil.jumlah_rw} /></FadeIn>
         </>
       )}
 
-      <FadeIn delay={100}><BeritaSection berita={berita ?? []} /></FadeIn>
-
-      {profil?.google_maps_embed_url && <FadeIn delay={100}><PetaSection embedUrl={profil.google_maps_embed_url} bgClass="bg-white" /></FadeIn>}
       <FadeIn delay={100}><PricelistSection produk={produk ?? []} /></FadeIn>
+      <FadeIn delay={100}><BeritaSection berita={berita ?? []} /></FadeIn>
       <FadeIn delay={100}><GaleriSection foto={foto ?? []} /></FadeIn>
+      
+      {profil?.google_maps_embed_url && (
+        <FadeIn delay={100}>
+          <PetaSection embedUrl={profil.google_maps_embed_url} bgClass="bg-[#f8faf7]" />
+        </FadeIn>
+      )}
 
       <Footer />
     </main>

@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { Users, Home, Map, Building2 } from 'lucide-react'
 
 function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
   const [count, setCount] = useState(0)
@@ -10,7 +9,12 @@ function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => { if (entries[0].isIntersecting) { setStarted(true); observer.disconnect() } },
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setStarted(true)
+          observer.disconnect()
+        }
+      },
       { threshold: 0.1 }
     )
     if (ref.current) observer.observe(ref.current)
@@ -40,26 +44,24 @@ function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
 
 export function InfografisSection({ penduduk, kk, rt, rw }: { penduduk: number; kk: number; rt: number; rw: number }) {
   const stats = [
-    { label: 'Jiwa', sublabel: 'Jumlah Penduduk', value: penduduk, icon: Users },
-    { label: 'KK', sublabel: 'Kepala Keluarga', value: kk, icon: Home },
-    { label: 'RT', sublabel: 'Rukun Tetangga', value: rt, icon: Map },
-    { label: 'RW', sublabel: 'Rukun Warga', value: rw, icon: Building2 },
+    { label: 'Jiwa', value: penduduk, color: 'text-green-700' },
+    { label: 'KK', value: kk, color: 'text-blue-700' },
+    { label: 'RT', value: rt, color: 'text-amber-700' },
+    { label: 'RW', value: rw, color: 'text-emerald-700' },
   ]
 
   return (
-    <section id="infografis" className="bg-prussian py-20">
-      <div className="mx-auto max-w-3xl px-6">
-        <h2 className="font-display text-2xl font-semibold text-white mb-2">Kelurahan dalam Angka</h2>
-        <p className="text-pastel-blue/70 text-sm mb-10">Data kependudukan dan wilayah terkini.</p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <section id="infografis" className="bg-white border-b border-border py-10">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((s) => (
-            <div key={s.label} className="rounded-xl bg-white/5 border border-white/10 p-6 text-center">
-              <s.icon className="w-5 h-5 text-pastel-blue mx-auto mb-3 opacity-70" />
-              <p className="font-mono text-4xl font-bold text-white tabular-nums">
+            <div key={s.label} className="text-center">
+              <p className={`font-mono text-3xl md:text-4xl font-bold ${s.color}`}>
                 <CountUp end={s.value} />
               </p>
-              <p className="font-mono text-xs text-pastel-blue mt-1.5 uppercase tracking-wider">{s.label}</p>
-              <p className="text-white/40 text-xs mt-0.5">{s.sublabel}</p>
+              <p className="text-xs font-semibold text-muted-foreground mt-1 uppercase tracking-wider">
+                {s.label}
+              </p>
             </div>
           ))}
         </div>

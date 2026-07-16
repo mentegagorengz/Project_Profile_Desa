@@ -1,40 +1,64 @@
+import { Check } from 'lucide-react'
+
 type Produk = { nama_produk: string; kategori: string; harga_per_kg: number }
 
 export function PricelistSection({ produk }: { produk: Produk[] }) {
   if (!produk || produk.length === 0) return null
 
   return (
-    <section id="harga" className="bg-light-silver py-20">
-      <div className="mx-auto max-w-3xl px-6">
-        <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Harga Sampah per Kilogram</h2>
-
-        {/* Signature element: struk kasir — border dashed, header solid, angka mono rata kanan */}
-        <div
-          className="mx-auto max-w-md bg-white shadow-card border-x-2 border-dashed border-prussian/30"
-          style={{
-            borderTop: '2px dashed rgba(16,58,87,0.3)',
-            borderBottom: '2px dashed rgba(16,58,87,0.3)',
-          }}
-        >
-          <div className="bg-mughal-green text-white px-6 py-3 text-center">
-            <p className="font-display font-semibold tracking-wide text-lg">STRUK HARGA BANK SAMPAH</p>
-            <p className="font-mono text-xs opacity-80">Kelurahan Manembo-nembo Tengah</p>
-          </div>
-          <div className="px-6 py-4">
-            {produk.map((p, idx) => (
-              <div key={p.nama_produk} className={`flex justify-between py-2 text-sm ${idx !== produk.length - 1 ? 'border-b border-dashed border-prussian/15' : ''}`}>
-                <div>
-                  <p className="text-prussian font-medium">{p.nama_produk}</p>
-                  <p className="text-teal-blue text-xs">{p.kategori}</p>
+    <section id="harga" className="bg-white py-20">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Left Column: Program Description */}
+          <div>
+            <span className="text-xs font-bold text-primary uppercase tracking-widest block">
+              Program Unggulan
+            </span>
+            <h2 className="text-3xl font-bold mt-2 mb-4 text-foreground leading-tight">
+              Bank Sampah Plastik BUMDes
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-4 text-sm">
+              Program bank sampah plastik hadir sebagai solusi pengelolaan limbah sekaligus pemberdayaan ekonomi warga. Warga dapat menyetor berbagai jenis sampah plastik langsung ke kantor kelurahan dengan harga transparan.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mb-6 text-sm">
+              Sistem kami menggunakan pencatatan digital modern, memastikan setiap transaksi tercatat akurat dan transparan untuk seluruh pihak.
+            </p>
+            <div className="space-y-3">
+              {[
+                'Harga transparan per kilogram berdasarkan jenis plastik',
+                'Proses drop-off cepat di kantor kelurahan',
+                'Pencatatan digital real-time',
+                'Mendukung lingkungan dan ekonomi warga',
+              ].map((f, i) => (
+                <div key={i} className="flex items-start gap-2.5">
+                  <div className="w-5 h-5 rounded-full bg-primary/15 flex items-center justify-center shrink-0 mt-0.5">
+                    <Check size={11} className="text-primary" />
+                  </div>
+                  <span className="text-sm text-foreground">{f}</span>
                 </div>
-                <p className="font-mono text-prussian font-semibold self-center">
-                  Rp{p.harga_per_kg.toLocaleString('id-ID')}/kg
-                </p>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column: Price Grid */}
+          <div className="grid grid-cols-2 gap-3">
+            {produk.slice(0, 8).map((p) => (
+              <div
+                key={p.nama_produk}
+                className="bg-secondary rounded-xl p-4 border border-green-200 shadow-sm"
+              >
+                <div className="text-[10px] text-primary/70 font-semibold mb-1 uppercase tracking-wider font-mono">
+                  {p.kategori} · kg
+                </div>
+                <div className="text-sm font-bold text-foreground leading-tight line-clamp-2 h-10">
+                  {p.nama_produk}
+                </div>
+                <div className="mt-2 text-primary font-black text-base">
+                  Rp{p.harga_per_kg.toLocaleString('id-ID')}
+                  <span className="text-xs font-normal text-muted-foreground">/kg</span>
+                </div>
               </div>
             ))}
-          </div>
-          <div className="px-6 py-3 text-center border-t border-dashed border-prussian/20 bg-muted/30">
-            <p className="font-mono text-xs text-prussian/50">Harga berlaku di kantor kelurahan</p>
           </div>
         </div>
       </div>
