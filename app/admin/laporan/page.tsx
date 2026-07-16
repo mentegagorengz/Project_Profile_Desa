@@ -1,5 +1,6 @@
 import { getLaporanHarian, getLaporanBulanan } from '@/lib/queries/laporan'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { PageHeader } from '@/components/admin/PageHeader'
 
 export default async function LaporanPage({
   searchParams,
@@ -17,29 +18,35 @@ export default async function LaporanPage({
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Laporan Transaksi</h1>
+      <PageHeader eyebrow="Rekap" title="Laporan Transaksi" />
 
       <div className="grid gap-4 md:grid-cols-2">
-        <Card>
+        <Card className="border-pastel-blue bg-white shadow-sm">
           <CardHeader>
-            <CardTitle>Rekap Harian ({today})</CardTitle>
+            <CardTitle className="font-display font-semibold text-lg text-prussian">
+              Rekap Harian ({today})
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2">
-              <p className="text-2xl font-bold">Rp{harian.totalOmzet.toLocaleString('id-ID')}</p>
-              <p className="text-muted-foreground">{harian.jumlahTransaksi} Transaksi</p>
+            <div className="space-y-3">
+              <p className="text-3xl font-mono font-bold text-mughal-green">
+                Rp{harian.totalOmzet.toLocaleString('id-ID')}
+              </p>
+              <p className="text-sm text-prussian/70">
+                Jumlah Transaksi: <span className="font-mono font-semibold">{harian.jumlahTransaksi}</span>
+              </p>
               
-              <div className="pt-4 mt-4 border-t">
-                <p className="font-semibold mb-2">Volume Sampah Masuk:</p>
-                <ul className="text-sm space-y-1">
+              <div className="pt-4 mt-4 border-t border-pastel-blue/60">
+                <p className="font-display font-medium text-sm text-prussian mb-3">Volume Sampah Masuk:</p>
+                <ul className="text-sm space-y-2">
                   {Object.entries(harian.kgPerKategori).map(([kategori, kg]) => (
-                    <li key={kategori} className="flex justify-between">
+                    <li key={kategori} className="flex justify-between items-center text-prussian/80">
                       <span>{kategori}</span>
-                      <span className="font-medium">{kg} kg</span>
+                      <span className="font-mono font-semibold text-teal-blue">{kg} kg</span>
                     </li>
                   ))}
                   {Object.keys(harian.kgPerKategori).length === 0 && (
-                    <li className="text-muted-foreground italic">Belum ada data sampah masuk.</li>
+                    <li className="text-prussian/50 italic text-sm">Belum ada data sampah masuk.</li>
                   )}
                 </ul>
               </div>
@@ -47,14 +54,20 @@ export default async function LaporanPage({
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="border-pastel-blue bg-white shadow-sm">
           <CardHeader>
-            <CardTitle>Rekap Bulan Ini</CardTitle>
+            <CardTitle className="font-display font-semibold text-lg text-prussian">
+              Rekap Bulan Ini
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2">
-              <p className="text-2xl font-bold">Rp{bulanan.totalOmzet.toLocaleString('id-ID')}</p>
-              <p className="text-muted-foreground">{bulanan.jumlahTransaksi} Transaksi</p>
+            <div className="space-y-3">
+              <p className="text-3xl font-mono font-bold text-mughal-green">
+                Rp{bulanan.totalOmzet.toLocaleString('id-ID')}
+              </p>
+              <p className="text-sm text-prussian/70">
+                Jumlah Transaksi: <span className="font-mono font-semibold">{bulanan.jumlahTransaksi}</span>
+              </p>
             </div>
           </CardContent>
         </Card>

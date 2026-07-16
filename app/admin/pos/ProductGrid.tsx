@@ -20,10 +20,15 @@ export function ProductGrid({ produk }: { produk: Produk[] }) {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
       {produk.map((p) => (
-        <Card key={p.id} className="p-4 space-y-2">
-          <p className="font-semibold">{p.nama_produk}</p>
-          <p className="text-sm text-muted-foreground">{p.kategori} — Rp{p.harga_per_kg.toLocaleString('id-ID')}/kg</p>
-          <div className="flex gap-2">
+        <Card key={p.id} className="p-4 space-y-2 border-pastel-blue bg-white shadow-sm">
+          <p className="font-medium text-prussian">{p.nama_produk}</p>
+          <p className="text-sm text-teal-blue">
+            {p.kategori} —{' '}
+            <span className="font-mono text-mughal-green font-semibold">
+              Rp{p.harga_per_kg.toLocaleString('id-ID')}/kg
+            </span>
+          </p>
+          <div className="flex gap-2 pt-1">
             <Input
               type="number"
               step="0.1"
@@ -31,6 +36,7 @@ export function ProductGrid({ produk }: { produk: Produk[] }) {
               placeholder="kg"
               value={jumlah[p.id] ?? ''}
               onChange={(e) => setJumlah({ ...jumlah, [p.id]: e.target.value })}
+              className="border-pastel-blue focus:border-teal-blue font-mono"
             />
             <Button
               onClick={() => {
@@ -40,6 +46,7 @@ export function ProductGrid({ produk }: { produk: Produk[] }) {
                   setJumlah({ ...jumlah, [p.id]: '' })
                 }
               }}
+              className="bg-prussian hover:bg-prussian/90 text-white"
             >
               Tambah
             </Button>

@@ -23,16 +23,31 @@ export function UploadForm() {
   }
 
   return (
-    <form ref={formRef} action={handleSubmit} className="flex flex-col sm:flex-row gap-3 items-end rounded-lg border p-4 bg-card shadow-sm">
+    <form ref={formRef} action={handleSubmit} className="flex flex-col sm:flex-row gap-3 items-end rounded-lg border border-pastel-blue p-4 bg-white shadow-sm">
       <div className="w-full sm:flex-1">
-        <label className="text-sm font-medium mb-1 block">Pilih Foto</label>
-        <Input type="file" name="file" accept="image/*" required className="cursor-pointer" />
+        <label className="text-sm font-medium text-prussian mb-1 block">Pilih Foto</label>
+        <Input 
+          type="file" 
+          name="file" 
+          accept="image/*" 
+          required 
+          className="cursor-pointer border-pastel-blue focus:border-teal-blue" 
+        />
       </div>
       <div className="w-full sm:flex-1">
-        <label className="text-sm font-medium mb-1 block">Caption (Opsional)</label>
-        <Input type="text" name="caption" placeholder="Tuliskan keterangan foto..." />
+        <label className="text-sm font-medium text-prussian mb-1 block">Caption (Opsional)</label>
+        <Input 
+          type="text" 
+          name="caption" 
+          placeholder="Tuliskan keterangan foto..." 
+          className="border-pastel-blue focus:border-teal-blue"
+        />
       </div>
-      <Button type="submit" disabled={uploading} className="w-full sm:w-auto">
+      <Button 
+        type="submit" 
+        disabled={uploading} 
+        className="w-full sm:w-auto bg-prussian hover:bg-prussian/90 text-white font-display"
+      >
         {uploading ? (
           'Mengunggah...'
         ) : (
