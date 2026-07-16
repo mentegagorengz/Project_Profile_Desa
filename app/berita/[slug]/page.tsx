@@ -15,6 +15,14 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
     .eq('status', 'published')
     .single()
 
+  const { data: beritaTerkait } = await supabase
+    .from('berita_desa')
+    .select('judul, slug, created_at, gambar_url')
+    .eq('status', 'published')
+    .neq('slug', slug)
+    .order('created_at', { ascending: false })
+    .limit(2)
+
   if (!berita) notFound()
 
   return (
@@ -57,6 +65,44 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
           </div>
         </div>
       </article>
+
+      {beritaTerkait && beritaTerkait.length > 0 && (
+        <section className="bg-light-silver py-12 border-t border-pastel-blue/30">
+          <div className="mx-auto max-w-3xl px-6">
+            <h3 className="font-display text-xl font-semibold text-prussian mb-6">Berita Terkait</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {beritaTerkait.map((b) => (
+                <Link
+                  key={b.slug}
+                  href={`/berita/${b.slug}`}
+                  className="group block rounded-xl border border-pastel-blue/60 bg-white overflow-hidden hover:border-teal-blue hover:shadow-md transition-all duration-200"
+                >
+                  <div className="relative aspect-video overflow-hidden bg-light-silver">
+                    {b.gambar_url ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={b.gambar_url}
+                        alt={b.judul}
+                        className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-pastel-blue/50">
+                        <span className="font-mono text-xs">No Image</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h4 className="font-display font-semibold text-prussian group-hover:text-teal-blue transition-colors line-clamp-2 text-sm leading-snug">
+                      {b.judul}
+                    </h4>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       <Footer />
     </main>
   )
