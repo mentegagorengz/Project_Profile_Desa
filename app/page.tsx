@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
+import { HeroSection } from '@/components/public/HeroSection'
 import { SambutanLurah } from '@/components/public/SambutanLurah'
 import { ProfilSection } from '@/components/public/ProfilSection'
 import { InfografisSection } from '@/components/public/InfografisSection'
@@ -21,13 +22,7 @@ export default async function HomePage() {
   return (
     <main>
       <Navbar />
-      <header className="bg-prussian py-16 text-center md:text-left">
-        <div className="mx-auto max-w-3xl px-6">
-          <p className="font-mono text-xs uppercase tracking-wider text-pastel-blue mb-1">Website Resmi</p>
-          <h1 className="font-display text-4xl font-bold text-white">Kelurahan Manembo-nembo Tengah</h1>
-          <p className="text-pastel-blue mt-2">Kec. Matuari, Kota Bitung</p>
-        </div>
-      </header>
+      <HeroSection />
 
       {profil && (
         <>
