@@ -1,4 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
+import Link from 'next/link'
+import { ArrowLeft } from 'lucide-react'
 
 export default async function GaleriPublikPage() {
   const supabase = await createClient()
@@ -11,6 +13,12 @@ export default async function GaleriPublikPage() {
     <main className="min-h-screen">
       <header className="bg-prussian py-12">
         <div className="mx-auto max-w-3xl px-6">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-pastel-blue font-mono text-xs uppercase tracking-wider mb-4 hover:text-white transition"
+          >
+            <ArrowLeft className="w-3 h-3" /> Kembali ke Beranda
+          </Link>
           <p className="font-mono text-xs uppercase tracking-wider text-pastel-blue mb-1">Galeri</p>
           <h1 className="font-display text-3xl font-bold text-white">Galeri Kegiatan Kelurahan</h1>
         </div>
