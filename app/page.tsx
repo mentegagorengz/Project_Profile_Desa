@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { HeroSection } from '@/components/public/HeroSection'
+import { BeritaSection } from '@/components/public/BeritaSection'
 import { SambutanLurah } from '@/components/public/SambutanLurah'
 import { ProfilSection } from '@/components/public/ProfilSection'
 import { InfografisSection } from '@/components/public/InfografisSection'
@@ -14,7 +15,7 @@ export default async function HomePage() {
 
   const [{ data: profil }, { data: berita }, { data: produk }, { data: foto }] = await Promise.all([
     supabase.from('profil_kelurahan').select('*').single(),
-    supabase.from('berita_desa').select('judul, slug, created_at').eq('status', 'published').order('created_at', { ascending: false }).limit(5),
+    supabase.from('berita_desa').select('judul, slug, created_at, gambar_url').eq('status', 'published').order('created_at', { ascending: false }).limit(5),
     supabase.from('produk_bumdes').select('nama_produk, kategori, harga_per_kg').order('nama_produk'),
     supabase.from('galeri_foto').select('id, url, caption').order('created_at', { ascending: false }).limit(6),
   ])
@@ -32,29 +33,7 @@ export default async function HomePage() {
         </>
       )}
 
-      <section id="berita" className="bg-white py-16">
-        <div className="mx-auto max-w-3xl px-6">
-          <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Informasi</p>
-          <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Berita Terbaru</h2>
-          <ul className="space-y-3">
-            {berita?.map((b) => (
-              <li key={b.slug} className="border-b border-dashed border-pastel-blue pb-3">
-                <Link href={`/berita/${b.slug}`} className="text-prussian font-medium hover:text-mughal-green transition block">
-                  {b.judul}
-                </Link>
-                {b.created_at && (
-                  <p className="font-mono text-xs text-prussian/50 mt-1">
-                    {new Date(b.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
-                  </p>
-                )}
-              </li>
-            ))}
-            {(!berita || berita.length === 0) && (
-              <li className="text-prussian/50 italic">Belum ada berita yang dipublikasikan.</li>
-            )}
-          </ul>
-        </div>
-      </section>
+      <BeritaSection berita={berita ?? []} />
 
       {profil?.google_maps_embed_url && <PetaSection embedUrl={profil.google_maps_embed_url} bgClass="bg-light-silver" />}
       <PricelistSection produk={produk ?? []} />
