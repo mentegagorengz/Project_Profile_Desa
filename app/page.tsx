@@ -62,6 +62,28 @@ export default async function HomePage() {
       {profil?.google_maps_embed_url && <PetaSection embedUrl={profil.google_maps_embed_url} bgClass="bg-light-silver" />}
       <PricelistSection produk={produk ?? []} />
       <GaleriSection foto={foto ?? []} />
+
+      <footer className="bg-prussian py-12 text-white/80 border-t border-white/10">
+        <div className="mx-auto max-w-3xl px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-center md:text-left">
+            <p className="font-display font-semibold text-white">Kelurahan Manembo-nembo Tengah</p>
+            <p className="text-xs text-pastel-blue mt-1">Kec. Matuari, Kota Bitung, Sulawesi Utara</p>
+          </div>
+          <div className="shrink-0">
+            <Link
+              href="/admin"
+              className="text-xs font-mono uppercase tracking-wider bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors"
+            >
+              Portal Staf / Admin →
+            </Link>
+          </div>
+        </div>
+        <div className="mx-auto max-w-3xl px-6 border-t border-white/5 mt-8 pt-6 text-center">
+          <p className="text-[10px] text-pastel-blue/60 font-mono">
+            &copy; {new Date().getFullYear()} Kelurahan Manembo-nembo Tengah. Hak Cipta Dilindungi.
+          </p>
+        </div>
+      </footer>
     </main>
   )
 }
