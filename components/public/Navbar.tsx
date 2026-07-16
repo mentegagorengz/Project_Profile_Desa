@@ -1,65 +1,27 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Leaf } from 'lucide-react'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('')
   const pathname = usePathname()
 
   const navLinks = [
     { label: 'Beranda', href: '/' },
-    { label: 'Profil Kelurahan', href: '/#profil' },
-    { label: 'Harga Sampah', href: '/#harga' },
+    { label: 'Profil Kelurahan', href: '/profil' },
+    { label: 'Visi & Misi', href: '/visi-misi' },
     { label: 'Berita', href: '/berita' },
     { label: 'Galeri', href: '/galeri' },
   ]
 
-  useEffect(() => {
-    if (pathname !== '/') {
-      setActiveSection('')
-      return
-    }
-
-    const sections = ['beranda', 'profil', 'harga', 'berita', 'galeri']
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 120
-
-      for (const section of sections) {
-        const el = document.getElementById(section)
-        if (el) {
-          const top = el.offsetTop
-          const height = el.offsetHeight
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section)
-            break
-          }
-        }
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [pathname])
-
   const isActive = (href: string) => {
-    if (pathname !== '/') {
-      return pathname.startsWith(href) && href !== '/'
-    }
-    
     if (href === '/') {
-      return activeSection === 'beranda' || activeSection === ''
+      return pathname === '/'
     }
-    if (href === '/#profil') return activeSection === 'profil'
-    if (href === '/#harga') return activeSection === 'harga'
-    if (href === '/berita') return activeSection === 'berita'
-    if (href === '/galeri') return pathname.startsWith('/galeri')
-    
-    return false
+    return pathname.startsWith(href)
   }
 
   return (

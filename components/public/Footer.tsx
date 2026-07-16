@@ -29,8 +29,8 @@ export function Footer() {
           <div className="flex flex-col gap-2">
             {[
               { label: 'Beranda', href: '/' },
-              { label: 'Profil Kelurahan', href: '/#profil' },
-              { label: 'Harga Sampah', href: '/#harga' },
+              { label: 'Profil Kelurahan', href: '/profil' },
+              { label: 'Visi & Misi', href: '/visi-misi' },
               { label: 'Berita Desa', href: '/berita' },
               { label: 'Galeri Kegiatan', href: '/galeri' },
             ].map((link) => (
