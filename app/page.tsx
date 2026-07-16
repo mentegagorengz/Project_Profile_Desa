@@ -41,7 +41,7 @@ export default async function HomePage() {
           <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Berita Terbaru</h2>
           <ul className="space-y-3">
             {berita?.map((b) => (
-              <li key={b.slug} className="border-b border-pastel-blue pb-3">
+              <li key={b.slug} className="border-b border-dashed border-pastel-blue pb-3">
                 <Link href={`/berita/${b.slug}`} className="text-prussian font-medium hover:text-mughal-green transition">
                   {b.judul}
                 </Link>
