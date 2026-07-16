@@ -44,6 +44,16 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
           <div className="prose max-w-none text-prussian/90 leading-relaxed">
             <p className="whitespace-pre-line">{berita.konten}</p>
           </div>
+
+          <div className="mt-12 pt-8 border-t border-dashed border-pastel-blue">
+            <Link
+              href="/#berita"
+              className="inline-flex items-center gap-2 font-mono text-sm text-prussian hover:text-mughal-green transition-colors"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Kembali ke Beranda
+            </Link>
+          </div>
         </div>
       </article>
     </main>
