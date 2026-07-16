@@ -4,7 +4,7 @@ export function PricelistSection({ produk }: { produk: Produk[] }) {
   if (!produk || produk.length === 0) return null
 
   return (
-    <section className="bg-light-silver py-16">
+    <section id="harga" className="bg-light-silver py-16">
       <div className="mx-auto max-w-3xl px-6">
         <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Bank Sampah</p>
         <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Harga Sampah per Kilogram</h2>

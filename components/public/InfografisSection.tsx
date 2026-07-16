@@ -6,7 +6,7 @@ export function InfografisSection({ penduduk, kk, rt, rw }: { penduduk: number; 
     { label: 'RW', value: rw },
   ]
   return (
-    <section className="bg-light-silver py-16">
+    <section id="infografis" className="bg-light-silver py-16">
       <div className="mx-auto max-w-3xl px-6">
         <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Infografis</p>
         <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Kelurahan dalam Angka</h2>

@@ -1,6 +1,6 @@
 export function SambutanLurah({ sambutan, fotoUrl }: { sambutan: string; fotoUrl: string | null }) {
   return (
-    <section className="bg-light-silver py-16">
+    <section id="sambutan" className="bg-light-silver py-16">
       <div className="mx-auto max-w-3xl flex flex-col md:flex-row gap-8 items-center px-6 text-center md:text-left">
         {fotoUrl && (
           // eslint-disable-next-line @next/next/no-img-element

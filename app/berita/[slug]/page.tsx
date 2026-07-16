@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
+import { Navbar } from '@/components/public/Navbar'
 
 export default async function BeritaDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -17,6 +18,7 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
 
   return (
     <main className="min-h-screen">
+      <Navbar />
       <header className="bg-prussian py-10">
         <div className="mx-auto max-w-3xl px-6">
           <p className="font-mono text-xs uppercase tracking-wider text-pastel-blue mb-1">Berita</p>
@@ -29,12 +31,6 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
 
       <article className="bg-white py-16">
         <div className="mx-auto max-w-3xl px-6">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-teal-blue font-mono text-xs uppercase tracking-wider mb-8 hover:text-mughal-green transition"
-          >
-            <ArrowLeft className="w-3 h-3" /> Kembali ke Beranda
-          </Link>
 
           {berita.gambar_url && (
             // eslint-disable-next-line @next/next/no-img-element

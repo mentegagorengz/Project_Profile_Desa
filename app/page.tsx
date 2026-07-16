@@ -6,6 +6,7 @@ import { InfografisSection } from '@/components/public/InfografisSection'
 import { PetaSection } from '@/components/public/PetaSection'
 import { PricelistSection } from '@/components/public/PricelistSection'
 import { GaleriSection } from '@/components/public/GaleriSection'
+import { Navbar } from '@/components/public/Navbar'
 
 export default async function HomePage() {
   const supabase = await createClient()
@@ -19,6 +20,7 @@ export default async function HomePage() {
 
   return (
     <main>
+      <Navbar />
       <header className="bg-prussian py-16 text-center md:text-left">
         <div className="mx-auto max-w-3xl px-6">
           <p className="font-mono text-xs uppercase tracking-wider text-pastel-blue mb-1">Website Resmi</p>
@@ -35,7 +37,7 @@ export default async function HomePage() {
         </>
       )}
 
-      <section className="bg-white py-16">
+      <section id="berita" className="bg-white py-16">
         <div className="mx-auto max-w-3xl px-6">
           <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Informasi</p>
           <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Berita Terbaru</h2>

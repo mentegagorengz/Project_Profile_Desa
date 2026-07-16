@@ -6,7 +6,7 @@ export function GaleriSection({ foto }: { foto: Foto[] }) {
   if (!foto || foto.length === 0) return null
 
   return (
-    <section className="bg-white py-16">
+    <section id="galeri" className="bg-white py-16">
       <div className="mx-auto max-w-3xl px-6">
         <div className="flex items-end justify-between mb-6">
           <div>

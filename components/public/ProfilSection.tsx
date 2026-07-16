@@ -1,6 +1,6 @@
 export function ProfilSection({ visi, misi, sejarah }: { visi: string; misi: string; sejarah: string }) {
   return (
-    <section className="bg-white py-16">
+    <section id="profil" className="bg-white py-16">
       <div className="mx-auto max-w-3xl px-6">
         <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Profil</p>
         <h2 className="font-display text-2xl font-semibold text-prussian mb-6">Kelurahan Manembo-nembo Tengah</h2>
