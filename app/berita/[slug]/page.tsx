@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { Navbar } from '@/components/public/Navbar'
+import { Footer } from '@/components/public/Footer'
 
 export default async function BeritaDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -56,6 +57,7 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
           </div>
         </div>
       </article>
+      <Footer />
     </main>
   )
 }
