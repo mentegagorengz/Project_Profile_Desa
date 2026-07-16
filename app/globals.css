@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap');
 @import "tailwindcss";
 
+/* ── Brand palette & type — "The Green Harmony" (see DESIGN.md) ────────── */
 @theme {
   --color-prussian: #103A57;
   --color-mughal-green: #366B2B;
@@ -9,63 +10,94 @@
   --color-light-silver: #CEE5D6;
 
   --font-display: 'Space Grotesk', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
+  --font-sans: 'Inter', sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Soft Lift shadows — diffuse ambient light, never harsh */
+  --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
-h1, h2, h3 {
-  font-family: 'Space Grotesk', sans-serif;
+/* ── Semantic tokens → brand palette (consumed by shadcn/ui components) ── */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius: 0.625rem;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #103A57;          /* Prussian Blue — main text (High Contrast Rule) */
+  --card: #ffffff;
+  --card-foreground: #103A57;
+  --popover: #ffffff;
+  --popover-foreground: #103A57;
+  --primary: #366B2B;             /* Mughal Green — CTA & growth */
+  --primary-foreground: #ffffff;
+  --secondary: #307B8E;           /* Teal Blue — supporting interactions */
+  --secondary-foreground: #ffffff;
+  --muted: #CEE5D6;               /* Light Silver — alt section background */
+  --muted-foreground: #307B8E;    /* Teal Blue — supporting text (never light gray) */
+  --accent: #A9D3C5;              /* Pastel Blue — light highlight */
+  --accent-foreground: #103A57;
+  --destructive: #b91c1c;
+  --destructive-foreground: #ffffff;
+  --border: #d5e4db;              /* Light Silver-tinted soft divider */
+  --input: #d5e4db;
+  --ring: #366B2B;                /* Mughal Green focus ring */
+}
+
+.dark {
+  --background: #0b2233;
+  --foreground: #eaf3ef;
+  --card: #103A57;
+  --card-foreground: #eaf3ef;
+  --popover: #103A57;
+  --popover-foreground: #eaf3ef;
+  --primary: #4d8c3f;
+  --primary-foreground: #ffffff;
+  --secondary: #307B8E;
+  --secondary-foreground: #ffffff;
+  --muted: #17324a;
+  --muted-foreground: #A9D3C5;
+  --accent: #1c4a5c;
+  --accent-foreground: #eaf3ef;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #1f4560;
+  --input: #1f4560;
+  --ring: #4d8c3f;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
 }
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --radius: 0.625rem;
-  }
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-  }
   * {
-    border-color: hsl(var(--border));
+    border-color: var(--color-border);
   }
   body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
+    background-color: var(--color-background);
+    color: var(--color-foreground);
   }
 }

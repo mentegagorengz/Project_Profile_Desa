@@ -22,7 +22,7 @@ export function Footer() {
 
           {/* Kolom 2: Kontak */}
           <div>
-            <h3 className="font-mono text-sm uppercase tracking-wider text-teal-blue mb-4">Kontak & Lokasi</h3>
+            <h3 className="font-display font-semibold text-sm text-pastel-blue mb-4">Kontak & Lokasi</h3>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-pastel-blue shrink-0 mt-0.5" />
@@ -43,7 +43,7 @@ export function Footer() {
 
           {/* Kolom 3: Jam Layanan */}
           <div>
-            <h3 className="font-mono text-sm uppercase tracking-wider text-teal-blue mb-4">Jam Layanan</h3>
+            <h3 className="font-display font-semibold text-sm text-pastel-blue mb-4">Jam Layanan</h3>
             <ul className="space-y-3">
               <li className="flex items-center justify-between text-sm border-b border-white/10 pb-2">
                 <div className="flex items-center gap-2 text-white/80">

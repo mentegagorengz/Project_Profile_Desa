@@ -1,30 +1,37 @@
-import { User } from 'lucide-react'
-
 export function SambutanLurah({ sambutan, fotoUrl }: { sambutan: string; fotoUrl: string | null }) {
   return (
-    <section id="sambutan" className="bg-light-silver py-16">
-      <div className="mx-auto max-w-3xl flex flex-col md:flex-row gap-8 items-center px-6 text-center md:text-left">
-        {fotoUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={fotoUrl}
-            alt="Lurah Manembo-nembo Tengah"
-            className="h-40 w-40 rounded-full object-cover ring-4 ring-mughal-green shrink-0 mx-auto md:mx-0 shadow-lg"
-          />
-        ) : (
-          <div className="h-40 w-40 rounded-full bg-pastel-blue/20 flex items-center justify-center ring-4 ring-mughal-green shrink-0 mx-auto md:mx-0 shadow-lg">
-            <User className="w-16 h-16 text-teal-blue/50" />
+    <section id="sambutan" className="bg-white py-20">
+      <div className="mx-auto max-w-3xl px-6">
+        <div className="flex flex-col md:flex-row gap-10 items-center">
+          {/* Foto */}
+          <div className="shrink-0">
+            {fotoUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={fotoUrl}
+                alt="Lurah Manembo-nembo Tengah"
+                className="h-44 w-44 rounded-2xl object-cover shadow-card ring-2 ring-pastel-blue mx-auto md:mx-0"
+              />
+            ) : (
+              <div className="h-44 w-44 rounded-2xl bg-light-silver flex items-center justify-center shadow-card ring-2 ring-pastel-blue mx-auto md:mx-0">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-16 h-16 text-teal-blue/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+            )}
           </div>
-        )}
-        <div className="flex-1">
-          <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Sambutan</p>
-          <h2 className="font-display text-2xl font-semibold text-prussian mb-3">Selamat Datang di Portal Kelurahan</h2>
-          <p className="whitespace-pre-line text-prussian/80 leading-relaxed italic mb-4">
-            &quot;{sambutan || 'Bersama kita bangun Manembo-nembo Tengah yang lebih baik, sejahtera, dan harmonis.'}&quot;
-          </p>
-          <div>
-            <p className="font-display font-semibold text-prussian text-lg">Bpk. John Doe, S.IP</p>
-            <p className="font-mono text-xs text-teal-blue">Lurah Manembo-nembo Tengah</p>
+          {/* Teks */}
+          <div className="flex-1 text-center md:text-left">
+            <blockquote className="text-prussian/85 leading-relaxed text-base md:text-lg mb-6 relative">
+              <span className="text-5xl text-pastel-blue font-serif leading-none absolute -top-3 -left-2 select-none hidden md:block">&ldquo;</span>
+              <p className="md:pl-8 whitespace-pre-line">
+                {sambutan || 'Bersama kita bangun Manembo-nembo Tengah yang lebih baik, sejahtera, dan harmonis.'}
+              </p>
+            </blockquote>
+            <div className="border-t border-pastel-blue/40 pt-4">
+              <p className="font-display font-semibold text-prussian">Bpk. John Doe, S.IP</p>
+              <p className="text-sm text-teal-blue mt-0.5">Lurah Manembo-nembo Tengah</p>
+            </div>
           </div>
         </div>
       </div>

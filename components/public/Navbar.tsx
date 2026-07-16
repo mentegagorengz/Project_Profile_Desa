@@ -30,7 +30,7 @@ export function Navbar() {
   ]
 
   return (
-    <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md border-b border-pastel-blue/80 shadow-sm py-0' : 'bg-transparent py-2'}`}>
+    <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 backdrop-blur-md border-b border-pastel-blue shadow-sm py-0' : 'bg-transparent py-2'}`}>
       <div className="mx-auto max-w-4xl px-6">
         <div className="flex h-16 items-center justify-between">
           {/* Logo / Brand */}

@@ -37,7 +37,7 @@ export default async function HomePage() {
 
       <FadeIn delay={100}><BeritaSection berita={berita ?? []} /></FadeIn>
 
-      {profil?.google_maps_embed_url && <FadeIn delay={100}><PetaSection embedUrl={profil.google_maps_embed_url} bgClass="bg-light-silver" /></FadeIn>}
+      {profil?.google_maps_embed_url && <FadeIn delay={100}><PetaSection embedUrl={profil.google_maps_embed_url} bgClass="bg-white" /></FadeIn>}
       <FadeIn delay={100}><PricelistSection produk={produk ?? []} /></FadeIn>
       <FadeIn delay={100}><GaleriSection foto={foto ?? []} /></FadeIn>
 

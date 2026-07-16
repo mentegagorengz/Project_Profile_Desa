@@ -10,18 +10,15 @@ type Berita = {
 
 export function BeritaSection({ berita }: { berita: Berita[] }) {
   return (
-    <section id="berita" className="bg-white py-16">
+    <section id="berita" className="bg-light-silver py-20">
       <div className="mx-auto max-w-3xl px-6">
         <div className="flex items-end justify-between mb-8">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-2">Informasi</p>
-            <h2 className="font-display text-2xl font-semibold text-prussian">Berita Terbaru</h2>
-          </div>
+          <h2 className="font-display text-2xl font-semibold text-prussian">Berita Terbaru</h2>
           <Link
             href="/berita"
-            className="hidden sm:inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-teal-blue hover:text-mughal-green transition shrink-0"
+            className="hidden sm:inline-flex items-center gap-1.5 text-sm text-teal-blue hover:text-mughal-green transition-colors"
           >
-            Semua Berita <ArrowRight className="w-3 h-3" />
+            Semua Berita <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
@@ -32,7 +29,7 @@ export function BeritaSection({ berita }: { berita: Berita[] }) {
                 <Link
                   key={b.slug}
                   href={`/berita/${b.slug}`}
-                  className={`group block rounded-xl border border-pastel-blue/60 overflow-hidden hover:border-teal-blue hover:shadow-md transition-all duration-200 ${idx === 0 ? 'sm:col-span-2' : ''}`}
+                  className={`group flex flex-col bg-white rounded-xl overflow-hidden shadow-card hover:shadow-hover transition-shadow duration-300 ${idx === 0 ? 'sm:col-span-2' : ''}`}
                 >
                   <div className={`relative overflow-hidden bg-light-silver ${idx === 0 ? 'aspect-[16/7]' : 'aspect-video'}`}>
                     {b.gambar_url ? (
@@ -40,24 +37,23 @@ export function BeritaSection({ berita }: { berita: Berita[] }) {
                       <img
                         src={b.gambar_url}
                         alt={b.judul}
-                        className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
+                        className="w-full h-full object-cover"
                         loading="lazy"
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <Newspaper className="w-10 h-10 text-pastel-blue" />
+                        <Newspaper className="w-10 h-10 text-pastel-blue/50" />
                       </div>
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-prussian/20 to-transparent opacity-0 group-hover:opacity-100 transition duration-300" />
                   </div>
-                  <div className="p-4">
+                  <div className="p-4 flex-1 flex flex-col">
                     <h3 className={`font-display font-semibold text-prussian group-hover:text-teal-blue transition-colors line-clamp-2 leading-snug ${idx === 0 ? 'text-lg' : 'text-sm'}`}>
                       {b.judul}
                     </h3>
                     {b.created_at && (
-                      <div className="flex items-center gap-1.5 mt-2">
-                        <Calendar className="w-3 h-3 text-teal-blue/70" />
-                        <p className="font-mono text-xs text-prussian/50">
+                      <div className="flex items-center gap-1.5 mt-auto pt-3">
+                        <Calendar className="w-3 h-3 text-teal-blue/60" />
+                        <p className="font-mono text-xs text-prussian/40">
                           {new Date(b.created_at).toLocaleDateString('id-ID', {
                             day: 'numeric', month: 'long', year: 'numeric',
                           })}
@@ -69,18 +65,15 @@ export function BeritaSection({ berita }: { berita: Berita[] }) {
               ))}
             </div>
             <div className="mt-6 text-center sm:hidden">
-              <Link
-                href="/berita"
-                className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-teal-blue hover:text-mughal-green transition"
-              >
-                Semua Berita <ArrowRight className="w-3 h-3" />
+              <Link href="/berita" className="inline-flex items-center gap-1.5 text-sm text-teal-blue hover:text-mughal-green transition-colors">
+                Semua Berita <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </>
         ) : (
-          <div className="py-16 text-center rounded-xl border border-dashed border-pastel-blue">
-            <Newspaper className="w-10 h-10 text-pastel-blue mx-auto mb-3" />
-            <p className="text-prussian/50 italic">Belum ada berita yang dipublikasikan.</p>
+          <div className="py-16 text-center rounded-xl border border-dashed border-pastel-blue bg-white">
+            <Newspaper className="w-10 h-10 text-pastel-blue/50 mx-auto mb-3" />
+            <p className="text-prussian/40">Belum ada berita yang dipublikasikan.</p>
           </div>
         )}
       </div>

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-16T14:38:00Z",
+  "title": "Design System: Profile Desa",
+  "extensions": {
+    "colorMeta": {
+      "mughal-green": { "role": "primary", "displayName": "Mughal Green", "canonical": "#366B2B" },
+      "teal-blue": { "role": "secondary", "displayName": "Teal Blue", "canonical": "#307B8E" },
+      "prussian": { "role": "neutral", "displayName": "Prussian Blue", "canonical": "#103A57" },
+      "pastel-blue": { "role": "neutral", "displayName": "Pastel Blue", "canonical": "#A9D3C5" },
+      "light-silver": { "role": "neutral", "displayName": "Light Silver", "canonical": "#CEE5D6" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headlines only." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles." },
+      "title": { "displayName": "Title", "purpose": "Card titles." },
+      "body": { "displayName": "Body", "purpose": "General text." },
+      "label": { "displayName": "Label", "purpose": "Technical data and monospace needs." }
+    },
+    "shadows": [
+      { "name": "card-shadow", "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)", "purpose": "Default for cards." },
+      { "name": "hover-shadow", "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)", "purpose": "Interactive hover state." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Used for main call to actions.",
+      "html": "<button class=\"ds-btn-primary\">Klik Disini</button>",
+      "css": ".ds-btn-primary { background: #366B2B; color: #fff; padding: 0.5rem 1rem; border-radius: 0.625rem; font-weight: 500; border: none; transition: all 0.2s; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); } .ds-btn-primary:hover { background: #103A57; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Green Harmony",
+    "overview": "Desain ini menggabungkan keseimbangan alam yang asri dengan kemajuan pusat pendidikan dan semangat komunitas yang hangat. Menggunakan pendekatan visual yang terbuka, bersih, dan mengundang partisipasi aktif dari warga. Antarmuka ini menolak kekakuan birokrasi pemerintahan lama, memilih untuk tampil segar dan transparan.",
+    "keyCharacteristics": [
+      "Ramah dan inklusif untuk semua usia.",
+      "Segar dan berbasis alam (hijau dan biru air/langit).",
+      "Hierarki visual yang sangat jelas untuk navigasi layanan masyarakat."
+    ],
+    "rules": [
+      { "name": "The High Contrast Rule", "body": "Teks utama selalu menggunakan Prussian Blue di atas latar belakang terang (Light Silver atau Putih) demi aksesibilitas membaca bagi lansia. Jangan pernah meletakkan abu-abu muda di atas putih.", "section": "colors" },
+      { "name": "The Data Legibility Rule", "body": "Angka yang berkaitan dengan harga (Bank Sampah) atau statistik selalu menggunakan font Monospace agar mudah dibaca sekilas.", "section": "typography" },
+      { "name": "The Soft Lift Rule", "body": "Bayangan harus terasa seperti cahaya sekitar yang difus (opacity rendah), bukan bayangan keras ala brutalism.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do gunakan rasio kontras tinggi antara Prussian Blue dan Light Silver/Putih demi aksesibilitas semua kalangan usia.",
+      "Do pastikan tombol dan area interaktif memiliki ruang klik minimal 44x44px.",
+      "Do terapkan efek glassmorphism secara halus (bukan berlebihan) untuk kesan modern."
+    ],
+    "donts": [
+      "Don't gunakan desain instansi pemerintahan lama yang kaku, membosankan, dan tidak responsif (seperti teks panjang menumpuk tanpa hierarki visual).",
+      "Don't gunakan bayangan kotak (harsh drop shadows); gunakan bayangan yang terdistribusi lembut.",
+      "Don't pakai gradien neon atau gaya desain yang mengganggu keseimbangan visual (seperti yang ditolak di PRODUCT.md)."
+    ]
+  }
+}

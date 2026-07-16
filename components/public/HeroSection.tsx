@@ -53,13 +53,13 @@ export function HeroSection() {
         <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
           <Link
             href="/#profil"
-            className="inline-flex items-center justify-center gap-2 bg-mughal-green hover:bg-mughal-green/90 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 font-mono text-sm uppercase tracking-wide"
+            className="inline-flex items-center justify-center gap-2 bg-mughal-green hover:bg-teal-blue text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-hover hover:-translate-y-1 font-mono text-sm uppercase tracking-wide"
           >
             Lihat Profil
           </Link>
           <Link
             href="/#berita"
-            className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 font-mono text-sm uppercase tracking-wide"
+            className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 hover:shadow-hover hover:-translate-y-1 font-mono text-sm uppercase tracking-wide"
           >
             Baca Berita
           </Link>
