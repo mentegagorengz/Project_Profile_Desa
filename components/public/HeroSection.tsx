@@ -32,7 +32,7 @@ export function HeroSection() {
         style={{ background: 'radial-gradient(circle, #307B8E 0%, transparent 70%)' }}
       />
 
-      <div className="relative mx-auto max-w-3xl px-6 py-20 md:py-28 text-center md:text-left">
+      <div className="relative mx-auto max-w-3xl px-6 pt-32 pb-20 md:pt-40 md:pb-28 text-center md:text-left">
         {/* Badge */}
         <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1 mb-6">
           <span className="w-2 h-2 rounded-full bg-pastel-blue animate-pulse" />

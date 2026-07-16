@@ -1,11 +1,22 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Menu, X, ArrowRight } from 'lucide-react'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20)
+    }
+    window.addEventListener('scroll', handleScroll)
+    // Initial check
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const navLinks = [
     { label: 'Beranda', href: '/' },
@@ -19,12 +30,12 @@ export function Navbar() {
   ]
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-pastel-blue/80 shadow-sm">
+    <nav className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md border-b border-pastel-blue/80 shadow-sm py-0' : 'bg-transparent py-2'}`}>
       <div className="mx-auto max-w-4xl px-6">
         <div className="flex h-16 items-center justify-between">
           {/* Logo / Brand */}
           <Link href="/" className="flex items-center gap-2">
-            <span className="font-display font-bold text-prussian text-sm sm:text-base leading-none">
+            <span className={`font-display font-bold text-sm sm:text-base leading-none transition-colors duration-300 ${isScrolled ? 'text-prussian' : 'text-white'}`}>
               Manembo-nembo Tengah
             </span>
           </Link>
@@ -35,24 +46,23 @@ export function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="font-mono text-xs uppercase tracking-wider text-prussian/80 hover:text-teal-blue transition-colors font-medium"
+                className={`font-mono text-xs uppercase tracking-wider transition-colors font-medium ${isScrolled ? 'text-prussian/80 hover:text-teal-blue' : 'text-white/80 hover:text-white'}`}
               >
                 {link.label}
               </Link>
             ))}
             <Link
               href="/admin"
-              className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-wider bg-prussian text-white px-3 py-1.5 rounded-lg hover:bg-prussian/95 transition-colors font-semibold"
+              className={`inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-wider px-3 py-1.5 rounded-lg transition-colors font-semibold ${isScrolled ? 'bg-prussian text-white hover:bg-prussian/95' : 'bg-white/10 text-white hover:bg-white/20'}`}
             >
               Login <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
 
-          {/* Mobile menu button */}
           <div className="flex lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-prussian hover:text-teal-blue hover:bg-light-silver/50 transition-colors"
+              className={`inline-flex items-center justify-center p-2 rounded-md transition-colors ${isScrolled ? 'text-prussian hover:text-teal-blue hover:bg-light-silver/50' : 'text-white hover:bg-white/10'}`}
             >
               {isOpen ? <X className="h-5 h-5" /> : <Menu className="h-5 h-5" />}
             </button>
