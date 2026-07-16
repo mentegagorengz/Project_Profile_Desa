@@ -57,8 +57,11 @@ export function Navbar() {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`inline-flex items-center justify-center p-2 rounded-md transition-colors ${isScrolled ? 'text-prussian hover:text-teal-blue hover:bg-light-silver/50' : 'text-white hover:bg-white/10'}`}
+              aria-label={isOpen ? 'Tutup menu navigasi' : 'Buka menu navigasi'}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
             >
-              {isOpen ? <X className="h-5 h-5" /> : <Menu className="h-5 h-5" />}
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
         </div>
@@ -66,7 +69,7 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="lg:hidden bg-white/95 backdrop-blur-lg border-t border-pastel-blue/50 px-6 py-6 space-y-4 shadow-xl">
+        <div id="mobile-menu" className="lg:hidden bg-white/95 backdrop-blur-lg border-t border-pastel-blue/50 px-6 py-6 space-y-4 shadow-xl">
           {navLinks.map((link) => (
             <Link
               key={link.label}

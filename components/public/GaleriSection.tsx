@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { X, ZoomIn } from 'lucide-react'
 
@@ -8,6 +8,15 @@ type Foto = { id: string; url: string; caption: string | null }
 
 export function GaleriSection({ foto }: { foto: Foto[] }) {
   const [selectedFoto, setSelectedFoto] = useState<Foto | null>(null)
+
+  useEffect(() => {
+    if (!selectedFoto) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedFoto(null)
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [selectedFoto])
 
   if (!foto || foto.length === 0) return null
 
@@ -55,10 +64,14 @@ export function GaleriSection({ foto }: { foto: Foto[] }) {
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-prussian/95 backdrop-blur-sm p-4"
           onClick={() => setSelectedFoto(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Detail Foto Kegiatan"
         >
           <button
             className="absolute top-5 right-5 text-white/60 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-colors"
             onClick={(e) => { e.stopPropagation(); setSelectedFoto(null) }}
+            aria-label="Tutup detail foto"
           >
             <X className="w-5 h-5" />
           </button>
