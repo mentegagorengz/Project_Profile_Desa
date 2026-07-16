@@ -1,12 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Leaf } from 'lucide-react'
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('')
   const pathname = usePathname()
 
   const navLinks = [
@@ -17,11 +18,48 @@ export function Navbar() {
     { label: 'Galeri', href: '/galeri' },
   ]
 
-  const isActive = (href: string) => {
-    if (href === '/') {
-      return pathname === '/'
+  useEffect(() => {
+    if (pathname !== '/') {
+      setActiveSection('')
+      return
     }
-    return pathname.startsWith(href)
+
+    const sections = ['beranda', 'profil', 'harga', 'berita', 'galeri']
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 120
+
+      for (const section of sections) {
+        const el = document.getElementById(section)
+        if (el) {
+          const top = el.offsetTop
+          const height = el.offsetHeight
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [pathname])
+
+  const isActive = (href: string) => {
+    if (pathname !== '/') {
+      return pathname.startsWith(href) && href !== '/'
+    }
+    
+    if (href === '/') {
+      return activeSection === 'beranda' || activeSection === ''
+    }
+    if (href === '/#profil') return activeSection === 'profil'
+    if (href === '/#harga') return activeSection === 'harga'
+    if (href === '/berita') return activeSection === 'berita'
+    if (href === '/galeri') return pathname.startsWith('/galeri')
+    
+    return false
   }
 
   return (
@@ -63,15 +101,6 @@ export function Navbar() {
             })}
           </div>
 
-          {/* Portal Admin button */}
-          <div className="hidden md:block">
-            <Link href="/admin">
-              <button className="bg-primary hover:bg-primary/90 text-primary-foreground text-xs font-semibold px-4 py-2 rounded-lg transition-colors cursor-pointer">
-                Portal Admin
-              </button>
-            </Link>
-          </div>
-
           <div className="flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -106,13 +135,6 @@ export function Navbar() {
               </Link>
             )
           })}
-          <div className="pt-2">
-            <Link href="/admin" onClick={() => setIsOpen(false)}>
-              <button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-sm font-semibold py-2.5 rounded-lg transition-colors cursor-pointer">
-                Portal Admin
-              </button>
-            </Link>
-          </div>
         </div>
       )}
     </nav>
