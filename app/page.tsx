@@ -10,6 +10,7 @@ import { PricelistSection } from '@/components/public/PricelistSection'
 import { GaleriSection } from '@/components/public/GaleriSection'
 import { Navbar } from '@/components/public/Navbar'
 import { Footer } from '@/components/public/Footer'
+import { FadeIn } from '@/components/ui/FadeIn'
 
 export default async function HomePage() {
   const supabase = await createClient()
@@ -28,17 +29,17 @@ export default async function HomePage() {
 
       {profil && (
         <>
-          <SambutanLurah sambutan={profil.sambutan_lurah} fotoUrl={profil.foto_lurah_url} />
-          <ProfilSection visi={profil.visi} misi={profil.misi} sejarah={profil.sejarah} />
-          <InfografisSection penduduk={profil.jumlah_penduduk} kk={profil.jumlah_kk} rt={profil.jumlah_rt} rw={profil.jumlah_rw} />
+          <FadeIn delay={100}><SambutanLurah sambutan={profil.sambutan_lurah} fotoUrl={profil.foto_lurah_url} /></FadeIn>
+          <FadeIn delay={100}><ProfilSection visi={profil.visi} misi={profil.misi} sejarah={profil.sejarah} /></FadeIn>
+          <FadeIn delay={100}><InfografisSection penduduk={profil.jumlah_penduduk} kk={profil.jumlah_kk} rt={profil.jumlah_rt} rw={profil.jumlah_rw} /></FadeIn>
         </>
       )}
 
-      <BeritaSection berita={berita ?? []} />
+      <FadeIn delay={100}><BeritaSection berita={berita ?? []} /></FadeIn>
 
-      {profil?.google_maps_embed_url && <PetaSection embedUrl={profil.google_maps_embed_url} bgClass="bg-light-silver" />}
-      <PricelistSection produk={produk ?? []} />
-      <GaleriSection foto={foto ?? []} />
+      {profil?.google_maps_embed_url && <FadeIn delay={100}><PetaSection embedUrl={profil.google_maps_embed_url} bgClass="bg-light-silver" /></FadeIn>}
+      <FadeIn delay={100}><PricelistSection produk={produk ?? []} /></FadeIn>
+      <FadeIn delay={100}><GaleriSection foto={foto ?? []} /></FadeIn>
 
       <Footer />
     </main>
