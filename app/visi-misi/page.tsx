@@ -15,7 +15,7 @@ export default async function VisiMisiPage() {
     ? profil.misi.split('\n').map((m: string) => m.trim()).filter(Boolean)
     : [
         'Menyelenggarakan pemerintahan desa yang bersih, transparan, dan akuntabel dengan pelayanan prima kepada masyarakat.',
-        'Mengembangkan potensi ekonomi lokal melalui BUMDes dan program-program pemberdayaan masyarakat yang berkelanjutan.',
+        'Mengembangkan potensi ekonomi lokal melalui program-program pemberdayaan masyarakat yang berkelanjutan.',
         'Mewujudkan lingkungan desa yang bersih, sehat, dan hijau melalui program pengelolaan sampah terpadu dan konservasi alam.',
         'Membangun and memelihara infrastruktur desa yang berkualitas untuk mendukung aktivitas warga dan perekonomian desa.',
         'Meningkatkan kualitas sumber daya manusia melalui pendidikan, pelatihan, dan pembinaan generasi muda desa.',
@@ -23,7 +23,7 @@ export default async function VisiMisiPage() {
       ]
 
   return (
-    <main className="min-h-screen bg-[#f8faf7]">
+    <main className="min-h-screen bg-muted">
       <Navbar />
 
       <div className="max-w-5xl mx-auto px-6 py-12 md:py-20">
@@ -37,12 +37,12 @@ export default async function VisiMisiPage() {
 
         {/* Visi Section */}
         <FadeIn delay={100}>
-          <div className="bg-gradient-to-br from-[#14532d] via-[#166534] to-[#15803d] text-white rounded-2xl p-8 md:p-12 relative overflow-hidden text-center mb-12 shadow-md">
+          <div className="bg-gradient-to-br from-mughal-green via-primary to-green-700 text-white rounded-2xl p-8 md:p-12 relative overflow-hidden text-center mb-12 shadow-md">
             <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-white/5 -translate-y-10 translate-x-10 pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full bg-white/5 translate-y-8 -translate-x-6 pointer-events-none" />
             <div className="relative">
-              <Leaf size={32} className="mx-auto mb-4 text-green-300 opacity-80" />
-              <p className="text-xs font-bold uppercase tracking-widest text-green-300 mb-3 font-mono">
+              <Leaf size={32} className="mx-auto mb-4 text-primary-foreground/60 opacity-80" />
+              <p className="text-xs font-bold uppercase tracking-widest text-primary-foreground/80 mb-3 font-mono">
                 Visi Kelurahan
               </p>
               <h2 className="font-display text-xl md:text-2xl font-bold leading-relaxed max-w-2xl mx-auto">

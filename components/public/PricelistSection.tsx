@@ -15,10 +15,10 @@ export function PricelistSection({ produk }: { produk: Produk[] }) {
               Program Unggulan
             </span>
             <h2 className="text-3xl font-bold mt-2 mb-4 text-foreground leading-tight">
-              Bank Sampah Plastik BUMDes
+              Bank Sampah Kelurahan
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4 text-sm">
-              Program bank sampah plastik hadir sebagai solusi pengelolaan limbah sekaligus pemberdayaan ekonomi warga. Warga dapat menyetor berbagai jenis sampah plastik langsung ke kantor kelurahan dengan harga transparan.
+              Program bank sampah hadir sebagai solusi pengelolaan limbah sekaligus pemberdayaan ekonomi warga. Warga dapat menyetor berbagai jenis sampah langsung ke kantor kelurahan dengan harga transparan.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-6 text-sm">
               Sistem kami menggunakan pencatatan digital modern, memastikan setiap transaksi tercatat akurat dan transparan untuk seluruh pihak.
@@ -45,7 +45,7 @@ export function PricelistSection({ produk }: { produk: Produk[] }) {
             {produk.slice(0, 8).map((p) => (
               <div
                 key={p.nama_produk}
-                className="bg-secondary rounded-xl p-4 border border-green-200 shadow-sm"
+                className="bg-secondary rounded-xl p-4 border border-border shadow-sm"
               >
                 <div className="text-[10px] text-primary/70 font-semibold mb-1 uppercase tracking-wider font-mono">
                   {p.kategori} · kg

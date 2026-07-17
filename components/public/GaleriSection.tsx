@@ -25,10 +25,10 @@ export function GaleriSection({ foto }: { foto: Foto[] }) {
       <section id="galeri" className="bg-white py-20">
         <div className="mx-auto max-w-3xl px-6">
           <div className="flex items-end justify-between mb-8">
-            <h2 className="font-display text-2xl font-semibold text-prussian">Galeri Kegiatan</h2>
+            <h2 className="font-display text-2xl font-semibold text-foreground">Galeri Kegiatan</h2>
             <Link
               href="/galeri"
-              className="hidden sm:text-sm text-teal-blue hover:text-mughal-green transition-colors sm:inline-block"
+              className="hidden sm:text-sm text-primary hover:text-primary/80 transition-colors sm:inline-block"
             >
               Lihat Semua →
             </Link>
@@ -39,7 +39,7 @@ export function GaleriSection({ foto }: { foto: Foto[] }) {
               <button
                 key={f.id}
                 type="button"
-                className="group relative aspect-square overflow-hidden rounded-xl bg-light-silver shadow-card hover:shadow-hover transition-shadow duration-300 cursor-pointer"
+                className="group relative aspect-square overflow-hidden rounded-xl bg-muted shadow-card hover:shadow-hover transition-shadow duration-300 cursor-pointer"
                 onClick={() => setSelectedFoto(f)}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -52,7 +52,7 @@ export function GaleriSection({ foto }: { foto: Foto[] }) {
           </div>
 
           <div className="mt-6 text-center sm:hidden">
-            <Link href="/galeri" className="text-sm text-teal-blue hover:text-mughal-green transition-colors">
+            <Link href="/galeri" className="text-sm text-primary hover:text-primary/80 transition-colors">
               Lihat Semua →
             </Link>
           </div>

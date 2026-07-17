@@ -20,9 +20,9 @@ export function ProductGrid({ produk }: { produk: Produk[] }) {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
       {produk.map((p) => (
-        <Card key={p.id} className="p-4 space-y-2 border-pastel-blue bg-white shadow-sm">
-          <p className="font-medium text-prussian">{p.nama_produk}</p>
-          <p className="text-sm text-teal-blue">
+        <Card key={p.id} className="p-4 space-y-2 border-border bg-card shadow-sm hover:border-primary/40 hover:shadow-md transition-all duration-200">
+          <p className="font-medium text-foreground">{p.nama_produk}</p>
+          <p className="text-sm text-primary">
             {p.kategori} —{' '}
             <span className="font-mono text-mughal-green font-semibold">
               Rp{p.harga_per_kg.toLocaleString('id-ID')}/kg
@@ -36,7 +36,17 @@ export function ProductGrid({ produk }: { produk: Produk[] }) {
               placeholder="kg"
               value={jumlah[p.id] ?? ''}
               onChange={(e) => setJumlah({ ...jumlah, [p.id]: e.target.value })}
-              className="border-pastel-blue focus:border-teal-blue font-mono"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault()
+                  const kg = parseFloat(jumlah[p.id] ?? '0')
+                  if (kg > 0) {
+                    addItem({ produk_id: p.id, nama_produk: p.nama_produk, harga_per_kg: p.harga_per_kg }, kg)
+                    setJumlah({ ...jumlah, [p.id]: '' })
+                  }
+                }
+              }}
+              className="border-border focus:border-ring font-mono"
             />
             <Button
               onClick={() => {
@@ -46,7 +56,7 @@ export function ProductGrid({ produk }: { produk: Produk[] }) {
                   setJumlah({ ...jumlah, [p.id]: '' })
                 }
               }}
-              className="bg-prussian hover:bg-prussian/90 text-white"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               Tambah
             </Button>

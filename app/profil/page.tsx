@@ -45,18 +45,18 @@ export default async function ProfilPage() {
   ]
 
   return (
-    <main className="min-h-screen bg-[#f8faf7]">
+    <main className="min-h-screen bg-muted">
       <Navbar />
       
       {/* Page Header */}
       <header className="bg-prussian pt-32 pb-16 text-white relative">
         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1400&q=80')] bg-cover bg-center pointer-events-none" />
         <div className="relative max-w-6xl mx-auto px-6">
-          <span className="text-xs font-bold text-green-300 uppercase tracking-widest block mb-2">
+          <span className="text-xs font-bold text-primary-foreground/60 uppercase tracking-widest block mb-2">
             Tentang Kami
           </span>
           <h1 className="font-display text-4xl font-bold">Profil Kelurahan</h1>
-          <p className="text-green-100 mt-2 max-w-2xl text-sm md:text-base leading-relaxed">
+          <p className="text-primary-foreground/70 mt-2 max-w-2xl text-sm md:text-base leading-relaxed">
             Mengenal lebih dekat sejarah, batas geografi, demografi penduduk, serta jajaran perangkat kelurahan Manembo-nembo Tengah.
           </p>
         </div>
@@ -129,7 +129,7 @@ export default async function ProfilPage() {
           </FadeIn>
         )}
 
-        {/* Perangkat Desa Section */}
+        {/* Perangkat Kelurahan Section */}
         <FadeIn delay={100}>
           <div className="space-y-6">
             <h2 className="text-2xl font-bold text-foreground">Perangkat Kelurahan</h2>

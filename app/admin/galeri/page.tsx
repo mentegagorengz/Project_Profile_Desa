@@ -16,25 +16,25 @@ export default async function GaleriPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader eyebrow="CMS" title="Galeri Foto" />
+      <PageHeader title="Galeri Foto" description="Upload dan kelola foto kegiatan." />
       
       <UploadForm />
       
       {foto && foto.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
           {foto.map((f) => (
-            <div key={f.id} className="group relative rounded-lg border border-pastel-blue bg-white overflow-hidden shadow-sm hover:shadow-md transition-all">
-              <div className="aspect-square relative overflow-hidden bg-light-silver">
+            <div key={f.id} className="group relative rounded-lg border border-border bg-card overflow-hidden shadow-sm hover:shadow-md transition-all">
+              <div className="aspect-square relative overflow-hidden bg-muted">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src={f.url} 
                   alt={f.caption ?? 'Foto Galeri'} 
-                  className="w-full h-full object-cover transition-transform group-hover:scale-105" 
+                  className="w-full h-full object-cover" 
                 />
               </div>
               <div className="p-3">
-                <p className="text-sm text-prussian font-medium truncate" title={f.caption ?? ''}>
-                  {f.caption || <span className="italic text-prussian/40 font-normal">Tanpa caption</span>}
+                <p className="text-sm text-foreground font-medium truncate" title={f.caption ?? ''}>
+                  {f.caption || <span className="italic text-muted-foreground font-normal">Tanpa caption</span>}
                 </p>
                 <form action={handleDelete} className="mt-3">
                   <input type="hidden" name="id" value={f.id} />
@@ -48,8 +48,8 @@ export default async function GaleriPage() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-16 border border-pastel-blue rounded-lg bg-white">
-          <p className="text-prussian/50 italic text-sm">Belum ada foto di galeri.</p>
+        <div className="text-center py-16 border border-border rounded-lg bg-card">
+          <p className="text-muted-foreground italic text-sm">Belum ada foto di galeri.</p>
         </div>
       )}
     </div>

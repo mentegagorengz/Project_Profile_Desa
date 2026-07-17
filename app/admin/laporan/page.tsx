@@ -18,7 +18,7 @@ export default async function LaporanPage({
 
   return (
     <div className="space-y-6">
-      <PageHeader eyebrow="Rekap" title="Laporan Transaksi" />
+      <PageHeader title="Laporan Transaksi" description="Rekap harian dan bulanan." />
 
       <div className="grid gap-4 md:grid-cols-2">
         <Card className="border-pastel-blue bg-white shadow-sm">
@@ -32,21 +32,21 @@ export default async function LaporanPage({
               <p className="text-3xl font-mono font-bold text-mughal-green">
                 Rp{harian.totalOmzet.toLocaleString('id-ID')}
               </p>
-              <p className="text-sm text-prussian/70">
+              <p className="text-sm text-muted-foreground">
                 Jumlah Transaksi: <span className="font-mono font-semibold">{harian.jumlahTransaksi}</span>
               </p>
               
-              <div className="pt-4 mt-4 border-t border-pastel-blue/60">
-                <p className="font-display font-medium text-sm text-prussian mb-3">Volume Sampah Masuk:</p>
+              <div className="pt-4 mt-4 border-t border-border/60">
+                <p className="font-display font-medium text-sm text-foreground mb-3">Volume Sampah Masuk:</p>
                 <ul className="text-sm space-y-2">
                   {Object.entries(harian.kgPerKategori).map(([kategori, kg]) => (
-                    <li key={kategori} className="flex justify-between items-center text-prussian/80">
+                    <li key={kategori} className="flex justify-between items-center text-foreground/80">
                       <span>{kategori}</span>
-                      <span className="font-mono font-semibold text-teal-blue">{kg} kg</span>
+                      <span className="font-mono font-semibold text-primary">{kg} kg</span>
                     </li>
                   ))}
                   {Object.keys(harian.kgPerKategori).length === 0 && (
-                    <li className="text-prussian/50 italic text-sm">Belum ada data sampah masuk.</li>
+                    <li className="text-muted-foreground italic text-sm">Belum ada data sampah masuk.</li>
                   )}
                 </ul>
               </div>
@@ -54,9 +54,9 @@ export default async function LaporanPage({
           </CardContent>
         </Card>
 
-        <Card className="border-pastel-blue bg-white shadow-sm">
+        <Card className="border-border bg-card shadow-sm">
           <CardHeader>
-            <CardTitle className="font-display font-semibold text-lg text-prussian">
+            <CardTitle className="font-display font-semibold text-lg text-foreground">
               Rekap Bulan Ini
             </CardTitle>
           </CardHeader>
@@ -65,7 +65,7 @@ export default async function LaporanPage({
               <p className="text-3xl font-mono font-bold text-mughal-green">
                 Rp{bulanan.totalOmzet.toLocaleString('id-ID')}
               </p>
-              <p className="text-sm text-prussian/70">
+              <p className="text-sm text-muted-foreground">
                 Jumlah Transaksi: <span className="font-mono font-semibold">{bulanan.jumlahTransaksi}</span>
               </p>
             </div>

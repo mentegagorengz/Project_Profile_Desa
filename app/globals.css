@@ -41,51 +41,72 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-placeholder: var(--placeholder);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
   --radius: 0.625rem;
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #1a2e1a;          /* Dark forest green — main text */
-  --card: #ffffff;
-  --card-foreground: #1a2e1a;
-  --popover: #ffffff;
-  --popover-foreground: #1a2e1a;
-  --primary: #166534;             /* Forest green — main actions */
-  --primary-foreground: #ffffff;
-  --secondary: #dcfce7;           /* Soft light green — supporting highlights */
-  --secondary-foreground: #14532d;
-  --muted: #f0f9f0;               /* Very light green tint */
-  --muted-foreground: #6b7280;
-  --accent: #fef3c7;
-  --accent-foreground: #92400e;
-  --destructive: #dc2626;
-  --destructive-foreground: #ffffff;
-  --border: rgba(22, 101, 52, 0.12); /* Soft green-tinted divider */
-  --input: #f0f9f0;
-  --ring: #16a34a;
+  --background: #FFFFFF;
+  --foreground: #1A202C;          /* Ink Black — body copy */
+  --card: #FFFFFF;
+  --card-foreground: #1A202C;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A202C;
+  --primary: #366B2B;             /* Mughal Green — CTA utama */
+  --primary-foreground: #FFFFFF;
+  --secondary: #E8F0E5;           /* Light green tint */
+  --secondary-foreground: #2D5A20;
+  --muted: #E8EDE9;               /* Deeper Soft Gray-Green for page background to make white cards pop */
+  --muted-foreground: #4A5568;    /* Charcoal Gray */
+  --accent: #E5F0F3;              /* Light teal tint */
+  --accent-foreground: #1C5E6E;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: #E2E8F0;              /* Slate Gray (Light) */
+  --input: #E2E8F0;               /* Slate Gray (Light) - matching border for visible boundaries */
+  --ring: #366B2B;                /* Mughal Green — focus ring */
+  --placeholder: #4A5568;         /* Charcoal Gray */
+  --sidebar: #103A57;             /* Prussian Blue */
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-accent: rgba(255, 255, 255, 0.1);
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #4A5568;
 }
 
 .dark {
-  --background: #0b2233;
-  --foreground: #eaf3ef;
-  --card: #103A57;
-  --card-foreground: #eaf3ef;
-  --popover: #103A57;
-  --popover-foreground: #eaf3ef;
-  --primary: #4d8c3f;
-  --primary-foreground: #ffffff;
-  --secondary: #307B8E;
-  --secondary-foreground: #ffffff;
-  --muted: #17324a;
-  --muted-foreground: #A9D3C5;
-  --accent: #1c4a5c;
-  --accent-foreground: #eaf3ef;
-  --destructive: #ef4444;
-  --destructive-foreground: #ffffff;
-  --border: #1f4560;
-  --input: #1f4560;
-  --ring: #4d8c3f;
+  --background: #0F1923;
+  --foreground: #E2E8F0;
+  --card: #1A2735;
+  --card-foreground: #E2E8F0;
+  --popover: #1A2735;
+  --popover-foreground: #E2E8F0;
+  --primary: #4A8C3F;
+  --primary-foreground: #FFFFFF;
+  --secondary: #1E3340;
+  --secondary-foreground: #A9D3C5;
+  --muted: #1A2735;
+  --muted-foreground: #8899AA;
+  --accent: #1C3A45;
+  --accent-foreground: #B8D4DC;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: #2A3A48;
+  --input: #2A3A48;               /* Matching border in dark mode */
+  --ring: #4A8C3F;
+  --placeholder: #8899AA;
+  --sidebar: #0F1923;
+  --sidebar-foreground: #E2E8F0;
+  --sidebar-accent: rgba(255, 255, 255, 0.08);
+  --sidebar-accent-foreground: #E2E8F0;
+  --sidebar-border: #2A3A48;
+  --sidebar-ring: #4A8C3F;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -100,4 +121,12 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

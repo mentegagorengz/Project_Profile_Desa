@@ -30,9 +30,9 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
       <Navbar />
       <header className="bg-prussian pt-32 pb-12">
         <div className="mx-auto max-w-3xl px-6">
-          <p className="font-mono text-xs uppercase tracking-wider text-pastel-blue mb-1">Berita</p>
+          <p className="font-mono text-xs uppercase tracking-wider text-primary-foreground/60 mb-1">Berita</p>
           <h1 className="font-display text-3xl font-bold text-white leading-tight">{berita.judul}</h1>
-          <p className="font-mono text-sm text-pastel-blue mt-2">
+          <p className="font-mono text-sm text-primary-foreground/60 mt-2">
             {new Date(berita.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}
           </p>
         </div>
@@ -46,18 +46,18 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
             <img
               src={berita.gambar_url}
               alt={berita.judul}
-              className="w-full aspect-video object-cover rounded-lg mb-8 border border-pastel-blue"
+              className="w-full aspect-video object-cover rounded-lg mb-8 border border-border"
             />
           )}
 
-          <div className="prose max-w-none text-prussian/90 leading-relaxed">
+          <div className="prose max-w-none text-foreground leading-relaxed">
             <p className="whitespace-pre-line">{berita.konten}</p>
           </div>
 
-          <div className="mt-12 pt-8 border-t border-dashed border-pastel-blue">
+          <div className="mt-12 pt-8 border-t border-dashed border-border">
             <Link
               href="/#berita"
-              className="inline-flex items-center gap-2 font-mono text-sm text-prussian hover:text-mughal-green transition-colors"
+              className="inline-flex items-center gap-2 font-mono text-sm text-foreground hover:text-primary transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
               Kembali ke Beranda
@@ -67,17 +67,17 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
       </article>
 
       {beritaTerkait && beritaTerkait.length > 0 && (
-        <section className="bg-light-silver py-12 border-t border-pastel-blue/30">
+        <section className="bg-muted py-12 border-t border-border">
           <div className="mx-auto max-w-3xl px-6">
-            <h3 className="font-display text-xl font-semibold text-prussian mb-6">Berita Terkait</h3>
+            <h3 className="font-display text-xl font-semibold text-foreground mb-6">Berita Terkait</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {beritaTerkait.map((b) => (
                 <Link
                   key={b.slug}
                   href={`/berita/${b.slug}`}
-                  className="group block rounded-xl border border-pastel-blue/60 bg-white overflow-hidden hover:border-teal-blue hover:shadow-md transition-all duration-200"
+                  className="group block rounded-xl border border-border bg-card overflow-hidden hover:border-primary hover:shadow-md transition-all duration-200"
                 >
-                  <div className="relative aspect-video overflow-hidden bg-light-silver">
+                  <div className="relative aspect-video overflow-hidden bg-slate-100 border-b border-border/30">
                     {b.gambar_url ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
@@ -86,13 +86,13 @@ export default async function BeritaDetailPage({ params }: { params: Promise<{ s
                         className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-pastel-blue/50">
-                        <span className="font-mono text-xs">No Image</span>
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Newspaper className="w-10 h-10 text-slate-400/60" />
                       </div>
                     )}
                   </div>
                   <div className="p-4">
-                    <h4 className="font-display font-semibold text-prussian group-hover:text-teal-blue transition-colors line-clamp-2 text-sm leading-snug">
+                    <h4 className="font-display font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2 text-sm leading-snug">
                       {b.judul}
                     </h4>
                   </div>

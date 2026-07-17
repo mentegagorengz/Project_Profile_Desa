@@ -11,7 +11,7 @@ export default async function BeritaPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader eyebrow="CMS" title="Berita Desa" />
+      <PageHeader title="Berita Desa" description="Tulis dan publikasikan berita kelurahan." />
       <BeritaForm />
       <div className="space-y-2">
         {beritaList && beritaList.length > 0 ? (
@@ -19,8 +19,8 @@ export default async function BeritaPage() {
             <BeritaRow key={b.id} berita={b} />
           ))
         ) : (
-          <div className="text-center py-12 rounded-lg border border-dashed border-pastel-blue bg-white">
-            <p className="text-prussian/50 italic text-sm">Belum ada berita. Tambahkan berita pertama di atas.</p>
+          <div className="text-center py-12 rounded-lg border border-dashed border-border bg-card">
+            <p className="text-muted-foreground italic text-sm">Belum ada berita. Tambahkan berita pertama di atas.</p>
           </div>
         )}
       </div>

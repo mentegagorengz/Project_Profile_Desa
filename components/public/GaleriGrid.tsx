@@ -20,7 +20,7 @@ export function GaleriGrid({ initialFoto }: { initialFoto: Foto[] }) {
 
   if (!initialFoto || initialFoto.length === 0) {
     return (
-      <div className="text-center py-24 text-prussian/70 bg-white rounded-xl border border-dashed border-pastel-blue">
+      <div className="text-center py-24 text-muted-foreground bg-card rounded-xl border border-dashed border-border">
         <p className="font-display text-lg">Belum ada foto di galeri.</p>
       </div>
     )
@@ -33,7 +33,7 @@ export function GaleriGrid({ initialFoto }: { initialFoto: Foto[] }) {
           <button
             key={f.id}
             type="button"
-            className="group relative aspect-square overflow-hidden rounded-xl bg-light-silver shadow-card hover:shadow-hover transition-shadow duration-300 cursor-pointer text-left"
+            className="group relative aspect-square overflow-hidden rounded-xl bg-muted shadow-card hover:shadow-hover transition-shadow duration-300 cursor-pointer text-left"
             onClick={() => setSelectedFoto(f)}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -56,10 +56,10 @@ export function GaleriGrid({ initialFoto }: { initialFoto: Foto[] }) {
         ))}
       </div>
 
-      <div className="mt-12 pt-8 border-t border-dashed border-pastel-blue/40">
+      <div className="mt-12 pt-8 border-t border-dashed border-border">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 font-mono text-sm text-prussian hover:text-mughal-green transition-colors"
+          className="inline-flex items-center gap-2 font-mono text-sm text-foreground hover:text-primary transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Kembali ke Beranda

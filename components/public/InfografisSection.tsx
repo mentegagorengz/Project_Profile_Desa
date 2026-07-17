@@ -44,10 +44,10 @@ function CountUp({ end, duration = 2000 }: { end: number; duration?: number }) {
 
 export function InfografisSection({ penduduk, kk, rt, rw }: { penduduk: number; kk: number; rt: number; rw: number }) {
   const stats = [
-    { label: 'Jiwa', value: penduduk, color: 'text-green-700' },
-    { label: 'KK', value: kk, color: 'text-blue-700' },
-    { label: 'RT', value: rt, color: 'text-amber-700' },
-    { label: 'RW', value: rw, color: 'text-emerald-700' },
+    { label: 'Jiwa', value: penduduk, color: 'text-primary' },
+    { label: 'KK', value: kk, color: 'text-teal-blue' },
+    { label: 'RT', value: rt, color: 'text-accent-foreground' },
+    { label: 'RW', value: rw, color: 'text-mughal-green' },
   ]
 
   return (

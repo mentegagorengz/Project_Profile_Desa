@@ -53,9 +53,8 @@ export default async function AdminDashboardPage() {
   return (
     <div className="space-y-8">
       <div>
-        <p className="font-mono text-xs uppercase tracking-wider text-teal-blue mb-1">Dashboard</p>
-        <h1 className="font-display text-2xl font-bold text-prussian">Selamat Datang, Admin</h1>
-        <p className="text-prussian/60 text-sm mt-1">Panel pengelolaan Kelurahan Manembo-nembo Tengah</p>
+        <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
+        <p className="text-muted-foreground text-sm mt-1">Panel pengelolaan Kelurahan Manembo-nembo Tengah</p>
       </div>
 
       {/* Stats */}
@@ -64,35 +63,35 @@ export default async function AdminDashboardPage() {
           <Link
             key={s.label}
             href={s.href}
-            className="bg-white rounded-xl border border-pastel-blue p-5 shadow-sm hover:shadow-md transition-shadow group"
+            className="bg-card rounded-xl border border-border p-5 shadow-sm hover:border-primary/40 hover:shadow-md transition-all duration-200 group"
           >
             <div className="flex items-start justify-between mb-4">
-              <div className="w-9 h-9 bg-light-silver rounded-lg flex items-center justify-center">
-                <s.icon className="w-4 h-4 text-teal-blue" />
+              <div className="w-9 h-9 bg-secondary rounded-lg flex items-center justify-center group-hover:bg-primary transition-colors">
+                <s.icon className="w-4 h-4 text-primary group-hover:text-primary-foreground transition-colors" />
               </div>
             </div>
-            <p className={`font-mono text-2xl font-bold text-prussian ${s.isMoney ? 'text-lg' : ''}`}>{s.value}</p>
-            <p className="text-xs text-prussian/60 mt-1">{s.label}</p>
+            <p className={`font-mono text-2xl font-bold text-foreground ${s.isMoney ? 'text-lg' : ''}`}>{s.value}</p>
+            <p className="text-xs text-muted-foreground mt-1">{s.label}</p>
           </Link>
         ))}
       </div>
 
       {/* Shortcuts */}
       <div>
-        <h2 className="font-display font-semibold text-prussian mb-4">Menu Cepat</h2>
+        <h2 className="font-display font-semibold text-foreground mb-4">Menu Cepat</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {shortcuts.map((s) => (
             <Link
               key={s.href}
               href={s.href}
-              className="bg-white rounded-xl border border-pastel-blue p-4 hover:border-teal-blue hover:shadow-md transition-all group flex items-start gap-4"
+              className="bg-card rounded-xl border border-border p-4 hover:border-primary/40 hover:shadow-md transition-all duration-200 group flex items-start gap-4"
             >
-              <div className="w-10 h-10 bg-light-silver rounded-lg flex items-center justify-center shrink-0 group-hover:bg-teal-blue transition-colors">
-                <s.icon className="w-4 h-4 text-teal-blue group-hover:text-white transition-colors" />
+              <div className="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors">
+                <s.icon className="w-4 h-4 text-primary group-hover:text-primary-foreground transition-colors" />
               </div>
               <div>
-                <p className="font-display font-semibold text-prussian text-sm">{s.label}</p>
-                <p className="text-xs text-prussian/60 mt-0.5">{s.desc}</p>
+                <p className="font-display font-semibold text-foreground text-sm">{s.label}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{s.desc}</p>
               </div>
             </Link>
           ))}

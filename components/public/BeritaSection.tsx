@@ -10,14 +10,14 @@ type Berita = {
 
 export function BeritaSection({ berita }: { berita: Berita[] }) {
   return (
-    <section id="berita" className="bg-[#f8faf7] py-20 border-b border-border">
+    <section id="berita" className="bg-muted py-20 border-b border-border">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex items-end justify-between mb-8">
           <div>
             <span className="text-xs font-bold text-primary uppercase tracking-widest block">
               Informasi Terkini
             </span>
-            <h2 className="text-2xl font-bold mt-1 text-foreground">Berita Desa</h2>
+            <h2 className="text-2xl font-bold mt-1 text-foreground">Berita Kelurahan</h2>
           </div>
           <Link href="/berita">
             <button className="border border-border bg-card text-foreground hover:bg-muted text-xs font-semibold px-4 py-2 rounded-lg transition-colors cursor-pointer inline-flex items-center gap-1">
@@ -34,7 +34,7 @@ export function BeritaSection({ berita }: { berita: Berita[] }) {
                 href={`/berita/${b.slug}`}
                 className="group flex flex-col bg-white rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow duration-300"
               >
-                <div className="relative aspect-video overflow-hidden bg-light-silver shrink-0">
+                <div className="relative aspect-video overflow-hidden bg-slate-100 shrink-0 border-b border-border/30">
                   {b.gambar_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -44,14 +44,14 @@ export function BeritaSection({ berita }: { berita: Berita[] }) {
                       loading="lazy"
                     />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-green-50/50">
-                      <Newspaper className="w-10 h-10 text-primary/20" />
+                    <div className="w-full h-full flex items-center justify-center">
+                      <Newspaper className="w-10 h-10 text-slate-400/60" />
                     </div>
                   )}
                 </div>
                 <div className="p-4 flex-1 flex flex-col justify-between">
                   <div>
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-800">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-secondary text-secondary-foreground">
                       Kabar Kelurahan
                     </span>
                     <h3 className="font-bold text-foreground mt-2 mb-1.5 text-sm leading-snug line-clamp-2 group-hover:text-primary transition-colors">
@@ -75,9 +75,9 @@ export function BeritaSection({ berita }: { berita: Berita[] }) {
             ))}
           </div>
         ) : (
-          <div className="py-16 text-center rounded-xl border border-dashed border-pastel-blue bg-white">
-            <Newspaper className="w-10 h-10 text-pastel-blue/50 mx-auto mb-3" />
-            <p className="text-prussian/40">Belum ada berita yang dipublikasikan.</p>
+          <div className="py-16 text-center rounded-xl border border-dashed border-border bg-card">
+            <Newspaper className="w-10 h-10 text-muted-foreground/30 mx-auto mb-3" />
+            <p className="text-muted-foreground">Belum ada berita yang dipublikasikan.</p>
           </div>
         )}
       </div>

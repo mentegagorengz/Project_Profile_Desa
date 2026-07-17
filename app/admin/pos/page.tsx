@@ -12,11 +12,11 @@ export default async function PosPage() {
   return (
     <div className="space-y-6">
       <PageHeader 
-        eyebrow="Transaksi" 
         title="Kasir POS" 
+        description="Catat transaksi bank sampah."
         action={
           <Link href="/admin/pos/riwayat">
-            <Button variant="outline" className="border-pastel-blue text-prussian hover:bg-light-silver">
+            <Button variant="outline" className="border-border text-foreground hover:bg-muted">
               Lihat Riwayat Transaksi
             </Button>
           </Link>

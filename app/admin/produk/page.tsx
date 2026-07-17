@@ -11,7 +11,7 @@ export default async function ProdukPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader eyebrow="Bank Sampah" title="Master Produk" />
+      <PageHeader title="Master Produk" description="Kelola daftar harga bank sampah." />
       <ProdukForm />
       <div className="space-y-2">
         {produk && produk.length > 0 ? (
@@ -19,8 +19,8 @@ export default async function ProdukPage() {
             <ProdukRow key={p.id} produk={p} />
           ))
         ) : (
-          <div className="text-center py-12 rounded-lg border border-dashed border-pastel-blue bg-white">
-            <p className="text-prussian/50 italic text-sm">Belum ada produk. Tambahkan produk pertama di atas.</p>
+          <div className="text-center py-12 rounded-lg border border-dashed border-border bg-card">
+            <p className="text-muted-foreground italic text-sm">Belum ada produk. Tambahkan produk pertama di atas.</p>
           </div>
         )}
       </div>

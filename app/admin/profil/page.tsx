@@ -8,7 +8,7 @@ export default async function ProfilPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeader eyebrow="CMS" title="Profil Kelurahan" />
+      <PageHeader title="Profil Kelurahan" description="Kelola informasi dasar kelurahan." />
       
       {profil ? (
         <ProfilForm profil={profil} />

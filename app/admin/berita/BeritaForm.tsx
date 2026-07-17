@@ -47,14 +47,14 @@ export function BeritaForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3 rounded-lg border border-pastel-blue p-4 bg-white shadow-sm">
-      <h3 className="font-display font-semibold text-prussian text-sm">Tambah Berita Baru</h3>
+    <form onSubmit={handleSubmit} className="space-y-3 rounded-lg border border-border p-4 bg-card shadow-sm">
+      <h3 className="font-display font-semibold text-foreground text-sm">Tambah Berita Baru</h3>
       <Input
         placeholder="Judul Berita"
         value={judul}
         onChange={(e) => handleJudulChange(e.target.value)}
         required
-        className="border-pastel-blue focus:border-teal-blue"
+        className="border-border focus:border-ring"
       />
       <div>
         <Input
@@ -62,18 +62,21 @@ export function BeritaForm() {
           value={slug}
           onChange={(e) => setSlug(e.target.value)}
           required
-          className="border-pastel-blue focus:border-teal-blue font-mono text-sm"
+          className="border-border focus:border-ring font-mono text-sm"
         />
-        <p className="text-xs text-prussian/40 mt-1">URL publik: /berita/{slug || '...'}</p>
+        <div className="flex items-center gap-2 mt-1.5">
+          <p className="text-xs text-muted-foreground flex-1">URL publik: <span className="font-mono text-foreground">/berita/{slug || '...'}</span></p>
+          <p className="text-[10px] text-muted-foreground bg-muted px-2 py-0.5 rounded-full" title="Slug adalah alamat URL untuk berita ini">Otomatis dari judul</p>
+        </div>
       </div>
       <Textarea
         placeholder="Konten Berita"
         value={konten}
         onChange={(e) => setKonten(e.target.value)}
         required
-        className="border-pastel-blue focus:border-teal-blue min-h-[120px]"
+        className="border-border focus:border-ring min-h-[120px]"
       />
-      <Button type="submit" disabled={loading} className="bg-prussian hover:bg-prussian/90 text-white font-display">
+      <Button type="submit" disabled={loading} className="bg-primary hover:bg-primary/90 text-primary-foreground font-display">
         {loading ? 'Menyimpan...' : 'Simpan sebagai Draft'}
       </Button>
     </form>
@@ -123,30 +126,30 @@ export function BeritaRow({ berita }: { berita: Berita }) {
 
   if (editing) {
     return (
-      <div className="rounded-lg border border-teal-blue bg-white p-4 space-y-3 shadow-sm">
+      <div className="rounded-lg border border-ring bg-card p-4 space-y-3 shadow-sm">
         <Input
           value={form.judul}
           onChange={(e) => setForm({ ...form, judul: e.target.value })}
-          className="border-pastel-blue focus:border-teal-blue font-medium"
+          className="border-border focus:border-ring font-medium"
           placeholder="Judul"
         />
         <Input
           value={form.slug}
           onChange={(e) => setForm({ ...form, slug: e.target.value })}
-          className="border-pastel-blue focus:border-teal-blue font-mono text-sm"
+          className="border-border focus:border-ring font-mono text-sm"
           placeholder="slug"
         />
         <Textarea
           value={form.konten}
           onChange={(e) => setForm({ ...form, konten: e.target.value })}
-          className="border-pastel-blue focus:border-teal-blue min-h-[100px]"
+          className="border-border focus:border-ring min-h-[100px]"
           placeholder="Konten"
         />
         <div className="flex gap-2">
           <Button size="sm" onClick={handleSave} disabled={loading} className="bg-mughal-green hover:bg-mughal-green/90 text-white">
             <Check className="w-3 h-3 mr-1" /> Simpan
           </Button>
-          <Button size="sm" variant="ghost" onClick={() => setEditing(false)} className="text-prussian/60">
+          <Button size="sm" variant="ghost" onClick={() => setEditing(false)} className="text-muted-foreground">
             <X className="w-3 h-3 mr-1" /> Batal
           </Button>
         </div>
@@ -155,15 +158,15 @@ export function BeritaRow({ berita }: { berita: Berita }) {
   }
 
   return (
-    <div className="rounded-lg border border-pastel-blue bg-white p-4 flex items-start justify-between gap-4">
+    <div className="rounded-lg border border-border bg-card p-4 flex items-start justify-between gap-4 hover:border-primary/40 hover:shadow-sm transition-all duration-200">
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 mb-1">
-          <p className="font-medium text-prussian truncate">{berita.judul}</p>
-          <span className={`shrink-0 text-xs font-mono px-2 py-0.5 rounded-full ${berita.status === 'published' ? 'bg-mughal-green/10 text-mughal-green' : 'bg-teal-blue/10 text-teal-blue'}`}>
+          <p className="font-medium text-foreground truncate">{berita.judul}</p>
+          <span className={`shrink-0 text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full ${berita.status === 'published' ? 'bg-primary/10 text-primary' : 'bg-secondary text-secondary-foreground'}`}>
             {berita.status}
           </span>
         </div>
-        <p className="text-xs text-prussian/50 font-mono">/{berita.slug}</p>
+        <p className="text-xs text-muted-foreground font-mono truncate">/{berita.slug}</p>
       </div>
       <div className="flex items-center gap-1 shrink-0">
         <Button
@@ -172,11 +175,11 @@ export function BeritaRow({ berita }: { berita: Berita }) {
           onClick={handleToggleStatus}
           disabled={loading}
           title={berita.status === 'published' ? 'Jadikan Draft' : 'Publikasikan'}
-          className={berita.status === 'published' ? 'text-teal-blue hover:text-teal-blue/70' : 'text-mughal-green hover:text-mughal-green/70'}
+          className={berita.status === 'published' ? 'text-primary hover:text-primary/70' : 'text-primary hover:text-primary/70'}
         >
           {berita.status === 'published' ? <FileText className="w-4 h-4" /> : <Globe className="w-4 h-4" />}
         </Button>
-        <Button size="sm" variant="ghost" onClick={() => setEditing(true)} className="text-prussian/60 hover:text-prussian">
+        <Button size="sm" variant="ghost" onClick={() => setEditing(true)} className="text-muted-foreground hover:text-foreground">
           <Pencil className="w-4 h-4" />
         </Button>
         <Button size="sm" variant="ghost" onClick={handleDelete} disabled={loading} className="text-red-500 hover:text-red-700">

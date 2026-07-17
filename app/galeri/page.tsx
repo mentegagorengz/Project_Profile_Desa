@@ -15,7 +15,7 @@ export default async function GaleriPublikPage() {
       <Navbar />
       <header className="bg-prussian pt-32 pb-12">
         <div className="mx-auto max-w-3xl px-6">
-          <p className="font-mono text-xs text-pastel-blue mb-1">Dokumentasi</p>
+          <p className="font-mono text-xs text-primary-foreground/60 mb-1">Dokumentasi</p>
           <h1 className="font-display text-3xl font-bold text-white">Galeri Kegiatan Kelurahan</h1>
         </div>
       </header>
