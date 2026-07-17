@@ -34,7 +34,7 @@ const navSections: { label: string; items: NavItem[] }[] = [
     label: 'Transaksi',
     items: [
       {
-        href: '/admin/pos', label: 'Kasir POS', icon: ShoppingCart,
+        href: '/admin/pos', label: 'POS', icon: ShoppingCart,
         children: [{ href: '/admin/pos/riwayat', label: 'Riwayat Transaksi' }],
       },
       { href: '/admin/laporan', label: 'Laporan', icon: BarChart3 },
@@ -92,18 +92,29 @@ export function SidebarNav() {
               return (
                 <div key={item.href}>
                   {hasChildren ? (
-                    <button
-                      onClick={() => toggleMenu(item.href)}
-                      className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors cursor-pointer ${
-                        isActive
-                          ? 'bg-primary text-primary-foreground'
-                          : 'text-white/70 hover:text-white hover:bg-white/10'
-                      }`}
-                    >
-                      <item.icon className="w-4 h-4 shrink-0" />
-                      <span className="flex-1 text-left truncate">{item.label}</span>
-                      <ChevronDown className={`w-3.5 h-3.5 shrink-0 text-white/40 transition-transform duration-200 ${isOpen ? 'rotate-0' : '-rotate-90'}`} />
-                    </button>
+                    <div className="relative group/menu">
+                      <Link
+                        href={item.href}
+                        className={`flex items-center gap-3 rounded-lg pl-3 pr-10 py-2.5 text-sm font-medium transition-colors ${
+                          isActive
+                            ? 'bg-primary text-primary-foreground'
+                            : 'text-white/70 hover:text-white hover:bg-white/10'
+                        }`}
+                      >
+                        <item.icon className="w-4 h-4 shrink-0" />
+                        <span className="flex-1 truncate">{item.label}</span>
+                      </Link>
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault()
+                          e.stopPropagation()
+                          toggleMenu(item.href)
+                        }}
+                        className="absolute right-1 top-1/2 -translate-y-1/2 p-2 rounded-md hover:bg-white/10 text-white/40 hover:text-white transition-colors cursor-pointer"
+                      >
+                        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? 'rotate-0' : '-rotate-90'}`} />
+                      </button>
+                    </div>
                   ) : (
                     <Link
                       href={item.href}
